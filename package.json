@@ -1,0 +1,23 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noahfeder/project2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noahfeder/project2/issues"
+  },
+  "homepage": "https://github.com/noahfeder/project2#readme",
+  "dependencies": {
+    "nodemon": "^1.10.0"
+  }
+}
