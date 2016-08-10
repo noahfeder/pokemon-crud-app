@@ -1,30 +1,16 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS pokemon CASCADE;
+DROP TABLE IF EXISTS types;
+
+
+
 CREATE TABLE users(
   user_id SERIAL PRIMARY KEY,
   username VARCHAR (25) UNIQUE,
   password_hashed VARCHAR NOT NULL
 );
 
-CREATE TABLE teams(
-  team_id SERIAL PRIMARY KEY,
-  pokemon_1 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_2 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_3 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_4 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_5 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_6 INTEGER REFERENCES pokemon(poke_id),
-  user_id_ref INTEGER REFERENCES users(user_id)
-);
-
-CREATE TABLE pokemon(
-  poke_id INTEGER PRIMARY KEY,
-  poke_name VARCHAR(10) UNIQUE NOT NULL,
-  png_img VARCHAR UNIQUE NOT NULL,
-  gif_img VARCHAR UNIQUE NOT NULL,
-  type INTEGER REFERENCES types(type_id),
-  hp INTEGER NOT NULL,
-  attack INTEGER NOT NULL,
-  defense INTEGER NOT NULL
-);
 
 CREATE TABLE types(
   type_id SERIAL PRIMARY KEY,
@@ -48,3 +34,41 @@ CREATE TABLE types(
   steel REAL DEFAULT 1.0,
   fairy REAL DEFAULT 1.0
 );
+
+CREATE TABLE pokemon(
+  poke_id INTEGER PRIMARY KEY,
+  poke_name VARCHAR(10) UNIQUE NOT NULL,
+  type VARCHAR (10) REFERENCES types(type_name),
+  hp INTEGER NOT NULL,
+  attack INTEGER NOT NULL,
+  defense INTEGER NOT NULL
+);
+
+
+
+
+CREATE TABLE teams(
+  team_id SERIAL,
+  team_name VARCHAR(50) NOT NULL,
+  pokemon_1 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_2 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_3 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_4 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_5 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_6 INTEGER REFERENCES pokemon(poke_id),
+  user_id_ref INTEGER REFERENCES users(user_id),
+  PRIMARY KEY (team_name, user_id_ref)
+);
+
+
+COPY types
+  (type_name,normal,fire,water,electric,grass,
+    ice,fighting,poison,ground,flying,psychic,
+    bug,rock,ghost,dragon,dark,steel,fairy)
+FROM '/Users/stavro510/code/wdi/project2/db/types.csv'
+    DELIMITER ';' CSV;
+
+COPY pokemon
+  (poke_id, poke_name, type, hp, attack, defense)
+FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'
+  DELIMITER ';' CSV;

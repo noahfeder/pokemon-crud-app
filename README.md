@@ -31,3 +31,8 @@ Types
 * id
 * name
 * [various types] DEFAULT 1
+
+
+SOURCES:
+* imgs: pokestadium.com
+* data: pokemondb.net
