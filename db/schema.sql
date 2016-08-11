@@ -38,6 +38,7 @@ CREATE TABLE types(
 CREATE TABLE pokemon(
   poke_id INTEGER PRIMARY KEY,
   poke_name VARCHAR(10) UNIQUE NOT NULL,
+  img_name VARCHAR(10) UNIQUE NOT NULL,
   type VARCHAR (10) REFERENCES types(type_name),
   hp INTEGER NOT NULL,
   attack INTEGER NOT NULL,
@@ -69,6 +70,6 @@ FROM '/Users/stavro510/code/wdi/project2/db/types.csv'
     DELIMITER ';' CSV;
 
 COPY pokemon
-  (poke_id, poke_name, type, hp, attack, defense)
+  (poke_id, poke_name, img_name, type, hp, attack, defense)
 FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'
   DELIMITER ';' CSV;

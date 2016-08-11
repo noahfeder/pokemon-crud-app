@@ -20,8 +20,7 @@ Teams
 Pokemon
 * id
 * name
-* gif http://www.pokestadium.com/sprites/xy/[name].gif
-* static http://www.pokestadium.com/sprites/green/[name].png
+* url-name
 * type REFS type
 * hp
 * atk
@@ -36,3 +35,10 @@ Types
 SOURCES:
 * imgs: pokestadium.com
 * data: pokemondb.net
+
+
+DATA TODO: save imgs?
+mr. mine -> mr-mime
+nidoranf
+nidoranm
+farfetchd
