@@ -51,12 +51,18 @@ CREATE TABLE pokemon(
 CREATE TABLE teams(
   team_id SERIAL,
   team_name VARCHAR(50) NOT NULL,
-  pokemon_1 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_2 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_3 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_4 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_5 INTEGER REFERENCES pokemon(poke_id),
-  pokemon_6 INTEGER REFERENCES pokemon(poke_id),
+  pokemon_1_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_1_order INTEGER,
+  pokemon_2_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_2_order INTEGER,
+  pokemon_3_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_3_order INTEGER,
+  pokemon_4_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_4_order INTEGER,
+  pokemon_5_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_5_order INTEGER,
+  pokemon_6_id INTEGER REFERENCES pokemon(poke_id),
+  pokemon_6_order INTEGER,
   user_id_ref INTEGER REFERENCES users(user_id),
   PRIMARY KEY (team_name, user_id_ref)
 );
@@ -73,3 +79,14 @@ COPY pokemon
   (poke_id, poke_name, img_name, type, hp, attack, defense)
 FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'
   DELIMITER ';' CSV;
+------------------------------------------------
+-- TEST VALUES FOLLOW -- -- TODO REMOVE BELOW --
+------------------------------------------------
+INSERT INTO users(username,password_hashed) VALUES('test','test');
+INSERT INTO teams(
+  team_name, pokemon_1_id, pokemon_1_order,
+    pokemon_2_id, pokemon_2_order, pokemon_3_id,
+    pokemon_3_order, pokemon_4_id, pokemon_4_order,
+    pokemon_5_id, pokemon_5_order, pokemon_6_id, pokemon_6_order,
+    user_id_ref)
+  VALUES ('bulbasaurs',1,1,1,2,1,3,1,4,1,5,1,6,1);
