@@ -1,0 +1,29 @@
+.big-card-img {
+  height: 249px;
+  padding: 10px;
+}
+
+.bottom-row-container {
+  position: relative;
+}
+
+.bottom-row .card-action a {
+  font-size: 12px;
+  color: red;
+}
+
+.remove-poke {
+  position:  absolute;
+  right: 5px;
+  top:  5px;
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes rotate {
+  100% {transform: scale(1.2, 1.2) rotate(360deg); -webkit-transform: rotate(360deg) scale(1.2, 1.2);}
+}
+
+.rotate {
+  animation: rotate 0.4s forwards linear;
+}
