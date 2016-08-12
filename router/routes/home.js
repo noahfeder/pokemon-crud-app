@@ -5,9 +5,9 @@ const db = pgp('postgres://stavro510@localhost:5432/poke_crud');
 
 router.get('/', function (req, res){
   if(!req.session.user){
-    res.redirect('/login');
+    res.render('index',{logged_in:false});
   } else {
-    res.render('index');
+    res.render('index',{logged_in:true});
   }
 });
 

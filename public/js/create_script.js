@@ -101,6 +101,10 @@ $(function(){
     });
   }
 
+  function teamNameError() {
+    $('#teamName').attr('placeholder','Try a new name, that one is taken!').addClass('invalid');
+  }
+
   function submitNewTeam() {
     var pokemon_data = {
       'pokemon_1_id' : $('#pokemon1').attr('poke_id'),
@@ -109,16 +113,18 @@ $(function(){
       'pokemon_4_id' : $('#pokemon4').attr('poke_id'),
       'pokemon_5_id' : $('#pokemon5').attr('poke_id'),
       'pokemon_6_id' : $('#pokemon6').attr('poke_id'),
-      'team_name'    : $('#teamName').val(),
-      'user_id_ref'  : 1
-    }
-    console.log(pokemon_data);
+      'team_name'    : $('#teamName').val()
+    };
     $.ajax({
-      'url' : '/create',
+      'url'    : '/create',
       'method' : 'POST',
-      'data' : pokemon_data
+      'data'   : pokemon_data
     }).done(function(data){
-      console.log('added team');
+      if (!data.error) {
+        location.replace('/');
+      } else {
+        $('#modal1').openModal({'complete':submitNewTeam,'ready':teamNameError});
+      }
     })
   }
 
