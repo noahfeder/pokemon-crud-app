@@ -9,7 +9,12 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <script src="/js/jquery.js"></script>
   <script src="/js/materialize.js"></script>
-  <script src="/js/index_script.js"></script>
+  {{#logged_in}}
+    <script src="/js/index_script.js"></script>
+  {{/logged_in}}
+  {{^logged_in}}
+    <script src="/js/login_script.js"></script>
+  {{/logged_in}}
 </head>
 <body>
 <div class="container">
@@ -32,7 +37,86 @@
     </nav>
   </div>
   {{#logged_in}}
-    <h1>Logged In</h1> <!-- TODO: ADD DISPLAY -->
+  <div class="row">
+  {{#teams}}
+    <div class="col s12" team-id="{{team_id}}">
+      <div class="row">
+        <div class="card horizontal col s12">
+          <div class="card-content">
+            <span class="card-title">{{team_name}}</span>
+          </div>
+          <div class="card-action">
+            <p><a href class="delete_button" team-id="{{team_id}}">DELETE</a>
+            <a href>EDIT</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_1_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_2_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_3_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_4_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_5_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">
+          <div class="card display_poke" pokemon-id="{{pokemon_6_id}}">
+            <div class="card-image">
+              <img src="" class="pokemon_image">
+            </div>
+            <div class="card-action">
+              <span class="pokemon_name"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/teams}}
+  </div>
   {{/logged_in}}
   {{^logged_in}}
   <div class="row">

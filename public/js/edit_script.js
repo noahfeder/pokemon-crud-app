@@ -36,20 +36,20 @@ $(function(){
     $('.hp').text('HP: ' + poke.hp);
     $('.attack').text('Attack: ' + poke.attack);
     $('.defense').text('Defense: ' + poke.defense);
-    $('#addPokemon').attr('poke_id',poke.poke_id);
+    $('#addPokemon').attr('poke-id',poke.poke_id);
   }
 
-  function addToTeam(poke) {
-    var $firstEmpty = $($('img[src="#!"]')[0]);
+  function addToTeam(poke, id) {
+    var $firstEmpty = id ? $('#'+id).children('.card-image').children('img') : $($('img[src="#!"]')[0]);
     $firstEmpty.attr('src', 'http://www.pokestadium.com/sprites/green/'+poke.img_name+'.png');
     $firstEmpty.parent().parent().removeClass('hide')
-      .attr('poke_id',poke.poke_id);
+      .attr('poke-id',poke.poke_id);
     var availableSlots = $('.hide.card').length;
     if (availableSlots === 0) {
       $('.btn-floating').removeClass('red').addClass('green rotate'); //TODO ROUTE EDIT PAGE
       $('.green').on('click',function(e){
         e.preventDefault();
-        $('#modal1').openModal({'complete':function(){submitNewTeam()}});
+        $('#modal1').openModal({'complete':function(){updateTeam()}});
       })
       $('#fab_text').text('done');
     } else {
@@ -68,7 +68,6 @@ $(function(){
   }
 
   function pokeChangeListener() {
-    console.log('change');
     var selected_poke = $('#pokeSelect').val();
     $.getJSON('http://localhost:2020/id/'+selected_poke)
       .done(function(data){
@@ -78,11 +77,25 @@ $(function(){
   }
 
   function addPokemonListener() {
-    $.getJSON('http://localhost:2020/id/'+$(this).attr('poke_id'))
+    $.getJSON('http://localhost:2020/id/'+$(this).attr('poke-id'))
     .done(function(data){
       addToTeam(data);
     });
   };
+
+  function initializeTeam() {
+    var current = 1;
+    $('.card.bottom-row').each(function(index, el) {
+      $.getJSON('http://localhost:2020/id/'+$(el).attr('poke-id'))
+        .done(function(data){
+          console.log(data);
+          addToTeam(data,'pokemon'+current);
+          current++;
+      });
+    });
+  }
+
+  initializeTeam();
 
   function initPage() {
     $('select').material_select();
@@ -102,30 +115,30 @@ $(function(){
   }
 
   function teamNameError() {
-    $('label[for="teamName"]').text('Try a new name, that one is taken!');
     $('#teamName').addClass('invalid');
     $('#modal1').addClass('animated shake')
   }
 
-  function submitNewTeam() {
-    var pokemon_data = {
-      'pokemon_1_id' : $('#pokemon1').attr('poke_id'),
-      'pokemon_2_id' : $('#pokemon2').attr('poke_id'),
-      'pokemon_3_id' : $('#pokemon3').attr('poke_id'),
-      'pokemon_4_id' : $('#pokemon4').attr('poke_id'),
-      'pokemon_5_id' : $('#pokemon5').attr('poke_id'),
-      'pokemon_6_id' : $('#pokemon6').attr('poke_id'),
-      'team_name'    : $('#teamName').val()
+  function updateTeam() {
+    var team_data = {
+      'poke1' : $('#pokemon1').attr('poke-id'),
+      'poke2' : $('#pokemon2').attr('poke-id'),
+      'poke3' : $('#pokemon3').attr('poke-id'),
+      'poke4' : $('#pokemon4').attr('poke-id'),
+      'poke5' : $('#pokemon5').attr('poke-id'),
+      'poke6' : $('#pokemon6').attr('poke-id'),
+      'id' : $('#team').attr('team-id')
     };
-    $.ajax({
-      'url'    : '/create',
-      'method' : 'POST',
-      'data'   : pokemon_data
+    console.log(team_data);
+    $.ajax({ // TODO UPDATE FUNCTION
+      'url'    : '/'+team_data.id+'/edit',
+      'method' : 'PUT',
+      'data'   : team_data
     }).done(function(data){
-      if (!data.error) {
+      if (data.update) {
         location.replace('/');
       } else {
-        $('#modal1').openModal({'complete':submitNewTeam,'ready':teamNameError});
+        $('#modal1').openModal({'complete':updateTeam,'ready':teamNameError});
       }
     })
   }
