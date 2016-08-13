@@ -61,7 +61,7 @@ $(function(){
 
   function typeChangeListener() {
     var activeTypes = $('#typeSelect').val();
-    $.getJSON('http://localhost:2020/')
+    $.getJSON('/pokemon/')
       .done(function(data) {
         addOptions(data, activeTypes);
     });
@@ -70,7 +70,7 @@ $(function(){
   function pokeChangeListener() {
     console.log('change');
     var selected_poke = $('#pokeSelect').val();
-    $.getJSON('http://localhost:2020/id/'+selected_poke)
+    $.getJSON('/pokemon/id/'+selected_poke)
       .done(function(data){
         $('#addPokemon').removeClass('disabled');
         viewPokemon(data);
@@ -78,7 +78,7 @@ $(function(){
   }
 
   function addPokemonListener() {
-    $.getJSON('http://localhost:2020/id/'+$(this).attr('poke_id'))
+    $.getJSON('/pokemon/id/'+$(this).attr('poke_id'))
     .done(function(data){
       addToTeam(data);
     });

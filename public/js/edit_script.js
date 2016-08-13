@@ -61,7 +61,7 @@ $(function(){
 
   function typeChangeListener() {
     var activeTypes = $('#typeSelect').val();
-    $.getJSON('http://localhost:2020/')
+    $.getJSON('/pokemon/')
       .done(function(data) {
         addOptions(data, activeTypes);
     });
@@ -69,7 +69,7 @@ $(function(){
 
   function pokeChangeListener() {
     var selected_poke = $('#pokeSelect').val();
-    $.getJSON('http://localhost:2020/id/'+selected_poke)
+    $.getJSON('/pokemon/id/'+selected_poke)
       .done(function(data){
         $('#addPokemon').removeClass('disabled');
         viewPokemon(data);
@@ -77,7 +77,7 @@ $(function(){
   }
 
   function addPokemonListener() {
-    $.getJSON('http://localhost:2020/id/'+$(this).attr('poke-id'))
+    $.getJSON('/pokemon/id/'+$(this).attr('poke-id'))
     .done(function(data){
       addToTeam(data);
     });
@@ -86,7 +86,7 @@ $(function(){
   function initializeTeam() {
     var current = 1;
     $('.card.bottom-row').each(function(index, el) {
-      $.getJSON('http://localhost:2020/id/'+$(el).attr('poke-id'))
+      $.getJSON('/pokemon/id/'+$(el).attr('poke-id'))
         .done(function(data){
           console.log(data);
           addToTeam(data,'pokemon'+current);
@@ -130,7 +130,7 @@ $(function(){
       'id' : $('#team').attr('team-id')
     };
     console.log(team_data);
-    $.ajax({ // TODO UPDATE FUNCTION
+    $.ajax({ // TODO DISMISS RETURNS TO TEAM FUNCTION, OK BUTTON SUBMITS
       'url'    : '/'+team_data.id+'/edit',
       'method' : 'PUT',
       'data'   : team_data

@@ -35,10 +35,13 @@ Types
 SOURCES:
 * imgs: pokestadium.com
 * data: pokemondb.net
+* Had to switch back to one port because Heroku, worked great locally
 
+TODO: 
+* Battle algo
+* modal close separate from submit for dismissing modals
+* team selection options:
+** Random 6 pokemon
+** random otheruser team
+** select otheruser team
 
-DATA TODO: save imgs?
-mr. mine -> mr-mime
-nidoranf
-nidoranm
-farfetchd

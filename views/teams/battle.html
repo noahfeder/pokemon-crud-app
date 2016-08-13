@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle</title>
+  <link rel="stylesheet" type="text/css" href="/css/materialize.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/battle_script.js"></script>
+</head>
+<body>
+
+<!-- FAB -->
+
+<!-- <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red hoverable" href="#!">
+    <i class="large material-icons" id="fab_text">not_interested</i>
+  </a>
+</div> -->
+
+<div class="container">
+
+<!-- NAVBAR -->
+  <div class="row">
+    <nav class="col s12 red darken-2">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Pokemon Training</a>
+        <ul id="nav-mobile" class="right hide-on-small-and-down">
+          <li><a href="/teams">View Teams</a></li>
+          <li><a href="/create">Create Team</a></li>
+          <li class="active"><a>Battle</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+<!-- SELECT YOUR TEAM -->
+
+<div class="row">
+  <div class="input-field col s12">
+    <select id="team-select">
+      <option disabled selected value="">Select your team</option>
+      {{#teams}}
+      <option value={{team_id}} data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
+      {{/teams}}
+    </select>
+  </div>
+</div>
+
+
+<!-- DISPLAY YOUR TEAM -->
+  <div class="row" id="team" team-id="{{team.team_id}}">
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon1" poke-id={{team.pokemon_1_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon2" poke-id={{team.pokemon_2_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon3" poke-id={{team.pokemon_3_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon4" poke-id={{team.pokemon_4_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon5" poke-id={{team.pokemon_5_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="pokemon6" poke-id={{team.pokemon_6_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENEMY TEAM -->
+</div>
+
+  <!-- MODAL IF NEEDED -->
+<!-- <div class="modal" id="modal1">
+  <div class="modal-content">
+    <div class="input-field col s8 offset-s2">
+      <input type="text" id="teamName" name="teamName">
+      <label for="teamName">Name your new team!</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Let's go!</a>
+  </div>
+</div> -->
+</div>
+</body>
+</html>
