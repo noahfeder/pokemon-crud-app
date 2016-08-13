@@ -39,8 +39,8 @@ SOURCES:
 * http://bulbapedia.bulbagarden.net/wiki/Damage : Damage algo
 
 TODO: 
-* LINK TO EDIT from /teams/
-* Can't edit other pls teams on /teams/:id/edit route
+* ~~LINK TO EDIT from /teams/~~
+* ~~Can't edit other pls teams on /teams/:id/edit route~~
 * TYPE damage?
 * TYPE icons?
 * modal close separate from submit for dismissing modals on team create and team edit

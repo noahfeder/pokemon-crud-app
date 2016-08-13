@@ -23,9 +23,13 @@ router.get('/:id/edit', function (req,res) {
       'SELECT * FROM teams WHERE team_id = $1; SELECT * FROM pokemon; SELECT * FROM types;',
       [team_id]
       ).then(function(data) {
-        res.render('teams/edit',{team: data[0], pokemon: data.slice(1,152),types: data.slice(152)});
+        if (req.session.user !== data[0].user_id_ref) {
+          res.redirect('/');
+        } else {
+          res.render('teams/edit',{team: data[0], pokemon: data.slice(1,152),types: data.slice(152)});
+        }
       }).catch(function(error){
-        res.render('/');
+        res.render('index');
       });
   }
 });
