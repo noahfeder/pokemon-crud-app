@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt-as-promised');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-const db = pgp('postgres://stavro510@localhost:5432/poke_crud');
+const db = pgp(process.env.DATABASE_URL);
 
 app.engine('html', mustache());
 app.set('view engine', 'html');

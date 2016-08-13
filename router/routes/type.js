@@ -1,7 +1,7 @@
 const express = require('express');
 const api_router = express.Router();
 const pgp = require('pg-promise')();
-const db = pgp('postgres://stavro510@localhost:5432/poke_crud');
+const db = pgp(process.env.DATABASE_URL);
 
 
 api_router.get('/:type',function(req,res) {
