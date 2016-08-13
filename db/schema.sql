@@ -1,3 +1,5 @@
+
+
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS pokemon CASCADE;
@@ -67,26 +69,21 @@ CREATE TABLE teams(
   PRIMARY KEY (team_name, user_id_ref)
 );
 
+-- BELOW MUST BE RUN VIA \copy IN heroku pg:psql
+-- \copy types (type_name,normal,fire,water,electric,grass,ice,fighting,poison,ground,flying,psychic,bug,rock,ghost,dragon,dark,steel,fairy) FROM '/Users/stavro510/code/wdi/project2/db/types.csv'     DELIMITER ';' CSV;
 
-COPY types
-  (type_name,normal,fire,water,electric,grass,
-    ice,fighting,poison,ground,flying,psychic,
-    bug,rock,ghost,dragon,dark,steel,fairy)
-FROM '/Users/stavro510/code/wdi/project2/db/types.csv'
-    DELIMITER ';' CSV;
+-- \copy pokemon (poke_id, poke_name, img_name, type, hp, attack, defense) FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'   DELIMITER ';' CSV;
 
-COPY pokemon
-  (poke_id, poke_name, img_name, type, hp, attack, defense)
-FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'
-  DELIMITER ';' CSV;
-------------------------------------------------
--- TEST VALUES FOLLOW -- -- TODO REMOVE BELOW --
-------------------------------------------------
-INSERT INTO users(username,password_hashed) VALUES('test','test');
-INSERT INTO teams(
-  team_name, pokemon_1_id, pokemon_1_order,
-    pokemon_2_id, pokemon_2_order, pokemon_3_id,
-    pokemon_3_order, pokemon_4_id, pokemon_4_order,
-    pokemon_5_id, pokemon_5_order, pokemon_6_id, pokemon_6_order,
-    user_id_ref)
-  VALUES ('bulbasaurs',1,1,1,2,1,3,1,4,1,5,1,6,1);
+-- BELO ARE THE ORIGINAL SEEDS
+-- COPY types
+--   (type_name,normal,fire,water,electric,grass,
+--     ice,fighting,poison,ground,flying,psychic,
+--     bug,rock,ghost,dragon,dark,steel,fairy)
+-- FROM '/Users/stavro510/code/wdi/project2/db/types.csv'
+--     DELIMITER ';' CSV;
+
+-- COPY pokemon
+--   (poke_id, poke_name, img_name, type, hp, attack, defense)
+-- FROM '/Users/stavro510/code/wdi/project2/db/pokemon.csv'
+--   DELIMITER ';' CSV;
+
