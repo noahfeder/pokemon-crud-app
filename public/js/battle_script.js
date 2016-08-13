@@ -1,5 +1,6 @@
 "use strict";
 $(function(){
+  var types = {};
 
   function addAttributes(img, poke) {
     var content = img.parent().parent().children('.card-content').children('p');
@@ -18,7 +19,8 @@ $(function(){
         'poke-id':poke.poke_id,
         'hp': poke.hp,
         'attack' : poke.attack,
-        'defense' : poke.defense
+        'defense' : poke.defense,
+        'poke-type' : poke.type
       });
     addAttributes($firstEmpty,poke);
     var availableSlots = $('.hide.card').length;
@@ -56,6 +58,10 @@ $(function(){
     });
   };
 
+  function attack(good,bad) {
+    return (((2 * good.hp + 10) / 250 ) * (10 * good.attack / bad.defense) + 2) * types[good.type][bad.type];
+  }
+
   function battle() {
     for (var i = 1; i < 7; i++) {
       var $pokemon = $('#pokemon' + i),
@@ -64,15 +70,17 @@ $(function(){
       var pokemon = {
         'attack' : $pokemon.attr('attack'),
         'defense' : $pokemon.attr('defense'),
-        'hp' : $pokemon.attr('hp')
+        'hp' : $pokemon.attr('hp'),
+        'type' : $pokemon.attr('poke-type')
       };
       var enemy = {
         'attack' : $enemy.attr('attack'),
         'defense' : $enemy.attr('defense'),
-        'hp' : $enemy.attr('hp')
+        'hp' : $enemy.attr('hp'),
+        'type' : $enemy.attr('poke-type')
       };
-      var myAttack = (((2 * pokemon.hp + 10) / 250 ) * (10 * pokemon.attack / enemy.defense) + 2),
-       enemyAttack = (((2 * enemy.hp + 10) / 250 ) * (10 * enemy.attack / pokemon.defense) + 2);
+      var myAttack = attack(pokemon,enemy),
+       enemyAttack = attack(enemy,pokemon);
       console.log('My attack: ' + myAttack);
       console.log('Enemy attack: ' + enemyAttack);
       if (myAttack > enemyAttack) {
@@ -88,11 +96,21 @@ $(function(){
     }
   }
 
+  function cacheTypes() {
+    $.getJSON('/types').done(function(data){
+      data.forEach(function(el) {
+        types[el.type_name] = el;
+      })
+      console.log(types);
+    })
+  }
+
   function initPage() {
     $('#team-select').on('change',initializeTeam)
     initializeEnemy();
     $('select').material_select();
     $('#battle').on('click',battle);
+    cacheTypes();
   };
 
   initPage();

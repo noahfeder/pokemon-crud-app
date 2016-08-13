@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const pgp = require('pg-promise')();
+
 const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/poke_crud');
 
+// INDEX
 router.get('/', function (req, res){
   if(!req.session.user){
     res.render('index',{logged_in:false});
@@ -14,13 +16,14 @@ router.get('/', function (req, res){
   }
 });
 
-router.get('/:id/edit', function (req,res) {
+// SHOW
+router.get('/:id', function (req,res) {
   if(!req.session.user) {
     res.render('index',{logged_in:false});
   } else {
     var team_id = req.params.id;
     db.any(
-      'SELECT * FROM teams WHERE team_id = $1; SELECT * FROM pokemon; SELECT * FROM types;',
+      'SELECT * FROM teams WHERE team_id = $1; SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types ORDER BY type_name;',
       [team_id]
       ).then(function(data) {
         if (req.session.user !== data[0].user_id_ref) {
@@ -34,12 +37,12 @@ router.get('/:id/edit', function (req,res) {
   }
 });
 
+// EDIT
 router.put('/:id/edit', function (req,res) {
   if(!req.session.user) {
     res.render('index',{logged_in:false});
   } else {
     var data = req.body;
-    console.log(data);
     db.none(
       'UPDATE teams SET (pokemon_1_id,pokemon_2_id,pokemon_3_id,pokemon_4_id,pokemon_5_id,pokemon_6_id) = ($1,$2,$3,$4,$5,$6) WHERE team_id = $7;',
       [data.poke1,data.poke2,data.poke3,data.poke4,data.poke5,data.poke6,data.id]
@@ -50,5 +53,22 @@ router.put('/:id/edit', function (req,res) {
       });
   }
 });
+
+
+// DELETE
+router.delete('/:id/delete', function (req, res){
+  if(!req.session.user){
+    res.render('index',{logged_in:false});
+  } else {
+    var id = req.params.id;
+    db.none('DELETE FROM teams WHERE team_id = $1 AND user_id_ref = $2;',[id,req.session.user])
+      .catch(function(error) {
+        res.send({'deleted':false,'error':error});
+      }).then(function() {
+        res.send({'deleted':true});
+      })
+  }
+});
+
 
 module.exports = router;

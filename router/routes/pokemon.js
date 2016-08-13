@@ -18,13 +18,24 @@ function validateName(str) {
 }
 
 api_router.get('/',function(req,res) {
-  db.any('SELECT * FROM pokemon;')
+  if (req.query.type) {
+    db.many('SELECT * FROM pokemon WHERE type = $1',[req.query.type])
     .catch(function(error){
       res.send(error);
     })
     .then(function(data){
       res.json(data);
     })
+  } else {
+    db.many('SELECT * FROM pokemon;')
+    .catch(function(error){
+      res.send(error);
+    })
+    .then(function(data){
+      res.json(data);
+    })
+  }
+
 })
 
 api_router.get('/:id',function(req,res) {
@@ -38,7 +49,8 @@ api_router.get('/:id',function(req,res) {
         res.json(data);
       });
   } else {
-    db.one('SELECT * FROM pokemon WHERE poke_name = $1',[validateName(poke_id)])
+    var name = validateName(req.params.id);
+    db.one('SELECT * FROM pokemon WHERE img_name = $1',[name])
       .catch(function(error) {
         res.send(error);
       }).then(function(data) {

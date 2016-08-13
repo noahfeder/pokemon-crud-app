@@ -16,7 +16,7 @@ $(function(){
   function deleteTeam(el) {
     var id = $(el).attr('team-id');
     $.ajax({
-      'url' : '/delete/'+ id,
+      'url' : '/' + id + '/delete/',
       'method' : 'DELETE'
     }).always(function(response){
       if (response.deleted) {

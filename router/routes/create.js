@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
   if (!req.session.user) {
     res.redirect('/');
   } else {
-    db.any('SELECT * FROM pokemon; SELECT * FROM types;'
+    db.any('SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types ORDER BY type_name;'
     ).catch(function(error){
       res.redirect('/');
     }).then(function(data){

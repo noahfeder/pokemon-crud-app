@@ -24,7 +24,7 @@
       <div class="nav-wrapper">
         <a href="/" class="brand-logo">Pokemon Training</a>
         <ul id="nav-mobile" class="right hide-on-small-and-down">
-          <li><a href="/teams">View Teams</a></li>
+          <li><a href="/">View Teams</a></li>
           <li class="active"><a>Create Team</a></li>
           <li><a href="/battle">Battle</a></li>
           <li><a href="/logout">Logout</a></li>
@@ -39,7 +39,7 @@
           <select multiple id="typeSelect">
             <option disabled selected value="">Filter by type?</option>
             {{#types}}
-            <option value="{{type_name}}">{{type_name}}</option>
+            <option value="{{type_name}}" class="left" data-icon="/img/types/{{type_name}}.png">{{type_name}}</option>
             {{/types}}
           </select>
         </div>
