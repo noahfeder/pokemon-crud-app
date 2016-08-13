@@ -4,7 +4,7 @@ $(function(){
   function loadPokemonData(el) {
     var $card = $(el);
     var id = $card.attr('pokemon-id');
-    $.getJSON('/pokemon/id/'+id)
+    $.getJSON('/pokemon/'+id)
       .done(function(data) {
         $card.children('.card-image').children().attr('src', 'http://www.pokestadium.com/sprites/green/'+data.img_name+'.png');
         $card.children('.card-action').children('span').text(data.poke_name);

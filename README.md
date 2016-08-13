@@ -36,14 +36,16 @@ SOURCES:
 * imgs: pokestadium.com
 * data: pokemondb.net
 * Had to switch back to one port because Heroku, worked great locally
+* http://bulbapedia.bulbagarden.net/wiki/Damage : Damage algo
 
 TODO: 
-* LINK TO EDIT fix
-* Can't edit other pppls teams
-* Battle algo
-* modal close separate from submit for dismissing modals
-* team selection options:
-** Random 6 pokemon
-** random otheruser team
-** select otheruser team
+* LINK TO EDIT from /teams/
+* Can't edit other pls teams on /teams/:id/edit route
+* TYPE damage?
+* TYPE icons?
+* modal close separate from submit for dismissing modals on team create and team edit
+* ~~team selection options:~~
+  * ~~Random 6 pokemon NO~~
+  * random otheruser team CHECK
+  * ~~select otheruser team NO~~
 

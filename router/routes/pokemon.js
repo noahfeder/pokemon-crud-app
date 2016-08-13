@@ -3,6 +3,7 @@ const api_router = express.Router();
 const pgp = require('pg-promise')();
 const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/poke_crud');
 
+
 function validateName(str) {
   str = str.toLowerCase();
   if (str.indexOf('mime') > -1) {
@@ -16,16 +17,36 @@ function validateName(str) {
   }
 }
 
-api_router.get('/:name',function(req,res) {
-  var poke_name = req.params.name;
-  poke_name = validateName(poke_name);
-  db.one('SELECT * FROM pokemon WHERE img_name = $1',[poke_name])
+api_router.get('/',function(req,res) {
+  db.any('SELECT * FROM pokemon;')
     .catch(function(error){
       res.send(error);
     })
     .then(function(data){
       res.json(data);
-    });
+    })
 })
+
+api_router.get('/:id',function(req,res) {
+  var poke_id = parseInt(req.params.id);
+  if (poke_id > 0 && poke_id < 152) {
+    db.one('SELECT * FROM pokemon WHERE poke_id = $1',[poke_id])
+      .catch(function(error){
+        res.send(error);
+      })
+      .then(function(data){
+        res.json(data);
+      });
+  } else {
+    db.one('SELECT * FROM pokemon WHERE poke_name = $1',[validateName(poke_id)])
+      .catch(function(error) {
+        res.send(error);
+      }).then(function(data) {
+        res.json(data);
+      })
+  }
+});
+
+
 
 module.exports = api_router;

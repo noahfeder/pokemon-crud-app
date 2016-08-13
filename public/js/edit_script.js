@@ -69,7 +69,7 @@ $(function(){
 
   function pokeChangeListener() {
     var selected_poke = $('#pokeSelect').val();
-    $.getJSON('/pokemon/id/'+selected_poke)
+    $.getJSON('/pokemon/'+selected_poke)
       .done(function(data){
         $('#addPokemon').removeClass('disabled');
         viewPokemon(data);
@@ -77,7 +77,7 @@ $(function(){
   }
 
   function addPokemonListener() {
-    $.getJSON('/pokemon/id/'+$(this).attr('poke-id'))
+    $.getJSON('/pokemon/'+$(this).attr('poke-id'))
     .done(function(data){
       addToTeam(data);
     });
@@ -86,7 +86,7 @@ $(function(){
   function initializeTeam() {
     var current = 1;
     $('.card.bottom-row').each(function(index, el) {
-      $.getJSON('/pokemon/id/'+$(el).attr('poke-id'))
+      $.getJSON('/pokemon/'+$(el).attr('poke-id'))
         .done(function(data){
           console.log(data);
           addToTeam(data,'pokemon'+current);

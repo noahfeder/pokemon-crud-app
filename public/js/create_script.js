@@ -70,7 +70,7 @@ $(function(){
   function pokeChangeListener() {
     console.log('change');
     var selected_poke = $('#pokeSelect').val();
-    $.getJSON('/pokemon/id/'+selected_poke)
+    $.getJSON('/pokemon/'+selected_poke)
       .done(function(data){
         $('#addPokemon').removeClass('disabled');
         viewPokemon(data);
@@ -78,7 +78,7 @@ $(function(){
   }
 
   function addPokemonListener() {
-    $.getJSON('/pokemon/id/'+$(this).attr('poke_id'))
+    $.getJSON('/pokemon/'+$(this).attr('poke_id'))
     .done(function(data){
       addToTeam(data);
     });

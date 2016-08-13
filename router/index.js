@@ -6,8 +6,6 @@ module.exports = function(app){
   app.use('/create', require('./routes/create'));
   app.use('/delete', require('./routes/delete'));
   app.use('/battle', require('./routes/battle'));
-  app.use('/pokemon/id', require('./routes/id'));
-  app.use('/pokemon/name',require('./routes/name'));
   app.use('/pokemon/type',require('./routes/type'));
-  app.use('/pokemon',require('./routes/all'));
+  app.use('/pokemon',require('./routes/pokemon'));
 };
