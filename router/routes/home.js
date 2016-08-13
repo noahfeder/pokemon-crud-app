@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pgp = require('pg-promise')();
-const db = pgp(process.env.DATABASE_URL);
+const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/poke_crud');
 
 router.get('/', function (req, res){
   if(!req.session.user){

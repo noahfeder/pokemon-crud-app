@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-const db = pgp(process.env.DATABASE_URL);
+const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/poke_crud');
 
 router.get('/', function (req, res) {
   if (!req.session.user) {

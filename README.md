@@ -38,6 +38,8 @@ SOURCES:
 * Had to switch back to one port because Heroku, worked great locally
 
 TODO: 
+* LINK TO EDIT fix
+* Can't edit other pppls teams
 * Battle algo
 * modal close separate from submit for dismissing modals
 * team selection options:

@@ -39,6 +39,113 @@
     </nav>
   </div>
 
+<!-- ENEMY TEAM -->
+{{#enemy}}
+  <div class="hide" id="enemyData" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}"></div>
+{{/enemy}}
+<div class="row" id="enemyTeam" team-id="{{team.team_id}}">
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy1" poke-id={{team.pokemon_1_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy2" poke-id={{team.pokemon_2_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+       <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy3" poke-id={{team.pokemon_3_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy4" poke-id={{team.pokemon_4_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy5" poke-id={{team.pokemon_5_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+      <div class="card bottom-row hide" id="enemy6" poke-id={{team.pokemon_6_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- END ENEMY TEAM -->
+
+
 <!-- SELECT YOUR TEAM -->
 
 <div class="row">
@@ -46,7 +153,7 @@
     <select id="team-select">
       <option disabled selected value="">Select your team</option>
       {{#teams}}
-      <option value={{team_id}} data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
+      <option value="{{team_id}}" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
       {{/teams}}
     </select>
   </div>
@@ -60,8 +167,14 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -70,8 +183,14 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -80,8 +199,14 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -90,8 +215,14 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -100,8 +231,14 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -110,14 +247,20 @@
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
-        <div class="card-action tiny">
-          <a href="#1" class="remove_pokemon">Remove</a>
+        <div class="card-content">
+          <p>
+            <span class="name"></span><br>
+            <span class="hp"></span><br>
+            <span class="type"></span><br>
+            <span class="attack"></span><br>
+            <span class="defense"></span>
+          </p>
         </div>
       </div>
     </div>
   </div>
+<!-- END YOUR TEAM -->
 
-  <!-- ENEMY TEAM -->
 </div>
 
   <!-- MODAL IF NEEDED -->
