@@ -49,7 +49,7 @@ $(function(){
       $('.btn-floating').removeClass('red').addClass('green rotate'); //TODO ROUTE EDIT PAGE
       $('.green').on('click',function(e){
         e.preventDefault();
-        $('#modal1').openModal({'complete':function(){submitNewTeam()}});
+        $('#modal1').openModal();
       })
       $('#fab_text').text('done');
     } else {
@@ -61,7 +61,7 @@ $(function(){
 
   function typeChangeListener() {
     var activeTypes = $('#typeSelect').val();
-    $.getJSON('/pokemon/')
+    $.getJSON('/pokemon')
       .done(function(data) {
         addOptions(data, activeTypes);
     });
@@ -84,21 +84,14 @@ $(function(){
     });
   };
 
-  function initPage() {
-    $('select').material_select();
-    $('#addPokemon').on('click',addPokemonListener);
-    $('#typeSelectButton').on('click',typeChangeListener);
-    $('#pokeSelect').on('change',pokeChangeListener);
-    $('.remove_pokemon').on('click',function(e){
-      e.preventDefault();
-      if ($('.hide.card').length === 0) {
-        $('.green').off();
-        $('.btn-floating').addClass('red').removeClass('green rotate');
-        $('#fab_text').text('not_interested');
-      }
-      $(this).parent().parent().addClass('hide');
-      $(this).parent().parent().children('.card-image').children('img').attr('src', '#!');
-    });
+  function removePokemon() {
+    if ($('.hide.card').length === 0) {
+      $('.green').off();
+      $('.btn-floating').addClass('red').removeClass('green rotate');
+      $('#fab_text').text('not_interested');
+    }
+    $(this).parent().parent().addClass('hide');
+    $(this).parent().parent().children('.card-image').children('img').attr('src', '#!');
   }
 
   function teamNameError() {
@@ -125,10 +118,21 @@ $(function(){
       if (!data.error) {
         location.replace('/');
       } else {
-        $('#modal1').openModal({'complete':submitNewTeam,'ready':teamNameError});
+        $('#modal1').openModal({'ready':teamNameError});
       }
     })
   }
+
+
+  function initPage() {
+    $('select').material_select();
+    $('#addPokemon').on('click',addPokemonListener);
+    $('#typeSelectButton').on('click',typeChangeListener);
+    $('#pokeSelect').on('change',pokeChangeListener);
+    $('.remove_pokemon').on('click',removePokemon);
+    $('#save_team').on('click', submitNewTeam);
+  }
+
 
   initPage();
 

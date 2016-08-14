@@ -59,7 +59,7 @@ $(function(){
   };
 
   function attack(good,bad) {
-    return (((2 * good.hp + 10) / 250 ) * (10 * good.attack / bad.defense) + 2) * types[good.type][bad.type];
+    return Math.floor((((2 * good.hp + 10) / 250 ) * (10 * good.attack / bad.defense) + 2) * types[good.type][bad.type]);
   }
 
   function battle() {
@@ -79,25 +79,27 @@ $(function(){
         'hp' : $enemy.attr('hp'),
         'type' : $enemy.attr('poke-type')
       };
-      var myAttack = attack(pokemon,enemy),
-       enemyAttack = attack(enemy,pokemon);
-      console.log('My attack: ' + myAttack);
-      console.log('Enemy attack: ' + enemyAttack);
+      var myAttack = attack(pokemon,enemy);
+      var enemyAttack = attack(enemy,pokemon);
       if (myAttack > enemyAttack) {
-        console.log('win')
-        $status.text('win');
+        $status.children('i')
+          .text('thumb_up')
+          .addClass('green-text');
+        $status.children('span').text('WIN');
       } else if (myAttack < enemyAttack) {
-        console.log('win')
-        $status.text('lose');
+        $status.children('i')
+          .text('thumb_down')
+          .addClass('red-text');
+        $status.children('span').text('LOSE');
       } else {
-        console.log('win')
-        $status.text('draw');
+        $status.children('i').text('thumbs_up_down');
+        $status.children('span').text('DRAW');
       }
     }
   }
 
   function cacheTypes() {
-    $.getJSON('/types').done(function(data){
+    $.getJSON('/types/').done(function(data){
       data.forEach(function(el) {
         types[el.type_name] = el;
       })

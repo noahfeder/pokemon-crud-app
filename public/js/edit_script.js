@@ -49,7 +49,7 @@ $(function(){
       $('.btn-floating').removeClass('red').addClass('green rotate'); //TODO ROUTE EDIT PAGE
       $('.green').on('click',function(e){
         e.preventDefault();
-        $('#modal1').openModal({'complete':function(){updateTeam()}});
+        $('#modal1').openModal();
       })
       $('#fab_text').text('done');
     } else {
@@ -61,7 +61,7 @@ $(function(){
 
   function typeChangeListener() {
     var activeTypes = $('#typeSelect').val();
-    $.getJSON('/pokemon/')
+    $.getJSON('/pokemon')
       .done(function(data) {
         addOptions(data, activeTypes);
     });
@@ -95,25 +95,6 @@ $(function(){
     });
   }
 
-  initializeTeam();
-
-  function initPage() {
-    $('select').material_select();
-    $('#addPokemon').on('click',addPokemonListener);
-    $('#typeSelectButton').on('click',typeChangeListener);
-    $('#pokeSelect').on('change',pokeChangeListener);
-    $('.remove_pokemon').on('click',function(e){
-      e.preventDefault();
-      if ($('.hide.card').length === 0) {
-        $('.green').off();
-        $('.btn-floating').addClass('red').removeClass('green rotate');
-        $('#fab_text').text('not_interested');
-      }
-      $(this).parent().parent().addClass('hide');
-      $(this).parent().parent().children('.card-image').children('img').attr('src', '#!');
-    });
-  }
-
   function teamNameError() {
     $('#teamName').addClass('invalid');
     $('#modal1').addClass('animated shake')
@@ -131,16 +112,39 @@ $(function(){
     };
     console.log(team_data);
     $.ajax({ // TODO DISMISS RETURNS TO TEAM FUNCTION, OK BUTTON SUBMITS
-      'url'    : '/'+team_data.id+'/edit',
+      'url'    : '/'+team_data.id,
       'method' : 'PUT',
       'data'   : team_data
     }).done(function(data){
       if (data.update) {
         location.replace('/');
       } else {
-        $('#modal1').openModal({'complete':updateTeam,'ready':teamNameError});
+        $('#modal1').openModal({'ready':teamNameError});
       }
     })
+  }
+
+  function removePokemon() {
+    if ($('.hide.card').length === 0) {
+      $('.green').off();
+      $('.btn-floating').addClass('red').removeClass('green rotate');
+      $('#fab_text').text('not_interested');
+    }
+    $(this).parent().parent().addClass('hide');
+    $(this).parent().parent().children('.card-image').children('img').attr('src', '#!');
+  }
+
+  function initPage() {
+    $('select').material_select();
+    $('#addPokemon').on('click',addPokemonListener);
+    $('#typeSelectButton').on('click',typeChangeListener);
+    $('#pokeSelect').on('change',pokeChangeListener);
+    initializeTeam();
+    $('#update').on('click',updateTeam)
+    $('.remove_pokemon').on('click',function(e){
+      e.preventDefault();
+      removePokemon();
+    });
   }
 
   initPage();

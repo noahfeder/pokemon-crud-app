@@ -16,6 +16,47 @@ router.get('/', function (req, res){
   }
 });
 
+// CREATE GET
+router.get('/new', function (req, res) {
+  if (!req.session.user) {
+    res.redirect('/');
+  } else {
+    db.any('SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types ORDER BY type_name;'
+    ).catch(function(error){
+      res.redirect('/');
+    }).then(function(data){
+      res.render('teams/create',{pokemon: data.slice(0,151),types: data.slice(151)});
+    });
+  }
+});
+
+// CREATE POST
+router.post('/new',function(req, res) {
+  var team = req.body;
+  console.log(req.session.user);
+  db.none(
+      'INSERT INTO teams(pokemon_1_id,pokemon_2_id,pokemon_3_id,pokemon_4_id,pokemon_5_id,pokemon_6_id,user_id_ref,team_name) VALUES($1,$2,$3,$4,$5,$6,$7,$8);',
+      [team.pokemon_1_id,team.pokemon_2_id,team.pokemon_3_id,team.pokemon_4_id,team.pokemon_5_id,team.pokemon_6_id,req.session.user,team.team_name]
+    ).catch(function(error){
+      console.log(error);
+      res.json({error:error.message})
+    }).then(function(){
+      res.json({error:false});
+    });
+});
+
+// BATTLE
+router.get('/battle', function (req, res){
+  if(!req.session.user){
+    res.render('index',{logged_in:false});
+  } else {
+    db.any('SELECT * FROM teams WHERE user_id_ref != $1 ORDER BY RANDOM() LIMIT 1; SELECT * FROM teams WHERE user_id_ref = $1;',[req.session.user,req.session.user])
+    .then(function(data){
+      res.render('teams/battle',{logged_in:true, enemy: data[0], teams: data.slice(1)});
+    });
+  }
+});
+
 // SHOW
 router.get('/:id', function (req,res) {
   if(!req.session.user) {
@@ -29,16 +70,17 @@ router.get('/:id', function (req,res) {
         if (req.session.user !== data[0].user_id_ref) {
           res.redirect('/');
         } else {
-          res.render('teams/edit',{team: data[0], pokemon: data.slice(1,152),types: data.slice(152)});
+          res.render('teams/show',{team: data[0], pokemon: data.slice(1,152),types: data.slice(152)});
         }
       }).catch(function(error){
-        res.render('index');
+        console.log(error);
+        res.redirect('/');
       });
   }
 });
 
 // EDIT
-router.put('/:id/edit', function (req,res) {
+router.put('/:id', function (req,res) {
   if(!req.session.user) {
     res.render('index',{logged_in:false});
   } else {
@@ -56,7 +98,7 @@ router.put('/:id/edit', function (req,res) {
 
 
 // DELETE
-router.delete('/:id/delete', function (req, res){
+router.delete('/:id', function (req, res){
   if(!req.session.user){
     res.render('index',{logged_in:false});
   } else {
@@ -69,6 +111,7 @@ router.delete('/:id/delete', function (req, res){
       })
   }
 });
+
 
 
 module.exports = router;

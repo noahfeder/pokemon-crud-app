@@ -1,6 +1,7 @@
 const express = require('express');
-const api_router = express.Router();
+const router = express.Router();
 const pgp = require('pg-promise')();
+
 const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/poke_crud');
 
 
@@ -17,18 +18,22 @@ function validateName(str) {
   }
 }
 
-api_router.get('/',function(req,res) {
+router.get('/',function(req,res) {
   if (req.query.type) {
-    db.many('SELECT * FROM pokemon WHERE type = $1',[req.query.type])
+    db.any('SELECT * FROM pokemon WHERE type = $1',[req.query.type])
     .catch(function(error){
+      console.log('typed')
+      console.log(error)
       res.send(error);
     })
     .then(function(data){
       res.json(data);
     })
   } else {
-    db.many('SELECT * FROM pokemon;')
+    db.any('SELECT * FROM pokemon;')
     .catch(function(error){
+      console.log('all')
+      console.log(error)
       res.send(error);
     })
     .then(function(data){
@@ -38,7 +43,7 @@ api_router.get('/',function(req,res) {
 
 })
 
-api_router.get('/:id',function(req,res) {
+router.get('/:id',function(req,res) {
   var poke_id = parseInt(req.params.id);
   if (poke_id > 0 && poke_id < 152) {
     db.one('SELECT * FROM pokemon WHERE poke_id = $1',[poke_id])
@@ -61,4 +66,4 @@ api_router.get('/:id',function(req,res) {
 
 
 
-module.exports = api_router;
+module.exports = router;

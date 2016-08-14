@@ -18,7 +18,7 @@ $(function(){
       'password' : $('#password').val()
     };
     $.ajax({
-      'url'    : '/' + route,
+      'url'    : '/users/' + route,
       'method' : 'POST',
       'data'   : data
     }).always(function(response) {
