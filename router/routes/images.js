@@ -3,7 +3,7 @@ const router = express.Router();
 const pgp = require('pg-promise')();
 const request = require('request');
 
-var key = process.env.BING_KEY;
+var key = process.env.BING_KEY || '74bf21042eb74e15948d8477e65b4c9d';
 
 router.get('/:queries',function(req,res) {
   var queries = req.params.queries

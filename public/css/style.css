@@ -3,6 +3,10 @@ body {
   background-size : cover;
 }
 
+#login_form {
+  background-color:  rgba(255,255,255,0.75);
+}
+
 .big-card-img {
   height: 249px;
   padding: 10px;
