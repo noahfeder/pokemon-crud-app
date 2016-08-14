@@ -21,7 +21,9 @@ router.get('/new', function (req, res) {
   if (!req.session.user) {
     res.redirect('/');
   } else {
-    db.any('SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types ORDER BY type_name;'
+    db.any(
+      'SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types  WHERE type_name != $1 AND type_name != $2 AND type_name != $3 ORDER BY type_name;',
+      ['dark','steel','flying']
     ).catch(function(error){
       res.redirect('/');
     }).then(function(data){
@@ -50,7 +52,7 @@ router.get('/battle', function (req, res){
   if(!req.session.user){
     res.render('index',{logged_in:false});
   } else {
-    db.any('SELECT * FROM teams WHERE user_id_ref != $1 ORDER BY RANDOM() LIMIT 1; SELECT * FROM teams WHERE user_id_ref = $1;',[req.session.user,req.session.user])
+    db.any('SELECT u.username, t.team_name, t.pokemon_1_id, t.pokemon_2_id, t.pokemon_3_id, t.pokemon_4_id, t.pokemon_5_id, t.pokemon_6_id FROM teams t JOIN users u ON u.user_id = t.user_id_ref WHERE t.user_id_ref != $1 ORDER BY RANDOM() LIMIT 1; SELECT * FROM teams WHERE user_id_ref = $1;',[req.session.user,req.session.user])
     .then(function(data){
       res.render('teams/battle',{logged_in:true, enemy: data[0], teams: data.slice(1)});
     });
@@ -64,8 +66,8 @@ router.get('/:id', function (req,res) {
   } else {
     var team_id = req.params.id;
     db.any(
-      'SELECT * FROM teams WHERE team_id = $1; SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types ORDER BY type_name;',
-      [team_id]
+      'SELECT * FROM teams WHERE team_id = $1; SELECT * FROM pokemon ORDER BY poke_name; SELECT * FROM types WHERE type_name != $2 AND type_name != $3 AND type_name != $4 ORDER BY type_name;',
+      [team_id, 'dark', 'steel', 'flying']
       ).then(function(data) {
         if (req.session.user !== data[0].user_id_ref) {
           res.redirect('/');

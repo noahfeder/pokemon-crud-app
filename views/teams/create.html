@@ -23,7 +23,14 @@
     <nav class="col s12 red darken-2">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo">Pokemon Training</a>
-        <ul id="nav-mobile" class="right hide-on-small-and-down">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">View Teams</a></li>
+          <li class="active"><a>Create Team</a></li>
+          <li><a href="/battle">Battle</a></li>
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+        <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="menu-mobile" class="side-nav">
           <li><a href="/">View Teams</a></li>
           <li class="active"><a>Create Team</a></li>
           <li><a href="/battle">Battle</a></li>
@@ -35,7 +42,7 @@
   <div class="row">
     <div class="col s12">
       <div class="row">
-        <div class="input-field col s5">
+        <div class="input-field col s8 m5">
           <select multiple id="typeSelect">
             <option disabled selected value="">Filter by type?</option>
             {{#types}}
@@ -43,10 +50,10 @@
             {{/types}}
           </select>
         </div>
-        <div class="col s2 valign-wrapper">
+        <div class="col s4 m2 valign-wrapper">
           <button class="btn waves-effect valign" id="typeSelectButton">Filter</button>
         </div>
-        <div class="input-field col s5" id="pokeSelectWrapper">
+        <div class="input-field col s12 m5" id="pokeSelectWrapper">
           <select id="pokeSelect">
             <option disabled selected value="">Choose a Pokemon!</option>
             {{#pokemon}}
@@ -80,7 +87,7 @@
     </div>
   </div>
   <div class="row" id="team">
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon1">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
@@ -90,7 +97,7 @@
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon2">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
@@ -100,7 +107,7 @@
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon3">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
@@ -110,7 +117,7 @@
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon4">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
@@ -120,7 +127,7 @@
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon5">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
@@ -130,7 +137,7 @@
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon6">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">

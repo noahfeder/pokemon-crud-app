@@ -4,11 +4,11 @@ $(function(){
 
   function addAttributes(img, poke) {
     var content = img.parent().parent().children('.card-content').children('p');
+    content.children('.type-img').attr('src', '/img/types/' + poke.type + '.png');
     content.children('.name').text(poke.poke_name);
     content.children('.hp').text('HP: ' + poke.hp);
-    content.children('.attack').text('Attack: ' + poke.attack);
-    content.children('.defense').text('Defense: ' + poke.defense);
-    content.children('.type').text('Type: ' + poke.type);
+    content.children('.attack').text('A:' + poke.attack);
+    content.children('.defense').text('D:' + poke.defense);
   };
 
   function addToTeam(poke, id) {
@@ -63,6 +63,7 @@ $(function(){
   }
 
   function battle() {
+    $('.status').removeClass('hide');
     for (var i = 1; i < 7; i++) {
       var $pokemon = $('#pokemon' + i),
         $enemy = $('#enemy' + i),
@@ -118,6 +119,7 @@ $(function(){
     $('select').material_select();
     $('#battle').on('click',battle);
     cacheTypes();
+    $(".button-collapse").sideNav();
   };
 
   initPage();

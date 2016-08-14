@@ -16,7 +16,6 @@ $(function(){
     var $wrapper = $('#pokeSelectWrapper');
     $wrapper.empty();
     $('select').material_select('destroy');
-
     var $select = $('<select id="pokeSelect">');
     $select.append('<option disabled selected value="">Choose a Pokemon!</option>');
     $select.appendTo($wrapper);
@@ -111,7 +110,7 @@ $(function(){
       'team_name'    : $('#teamName').val()
     };
     $.ajax({
-      'url'    : '/create',
+      'url'    : '/new',
       'method' : 'POST',
       'data'   : pokemon_data
     }).done(function(data){
@@ -131,6 +130,7 @@ $(function(){
     $('#pokeSelect').on('change',pokeChangeListener);
     $('.remove_pokemon').on('click',removePokemon);
     $('#save_team').on('click', submitNewTeam);
+    $(".button-collapse").sideNav();
   }
 
 

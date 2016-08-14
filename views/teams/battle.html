@@ -29,7 +29,14 @@
     <nav class="col s12 red darken-2">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo">Pokemon Training</a>
-        <ul id="nav-mobile" class="right hide-on-small-and-down">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">View Teams</a></li>
+          <li><a href="/new">Create Team</a></li>
+          <li class="active"><a>Battle</a></li>
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+        <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="menu-mobile" class="side-nav">
           <li><a href="/">View Teams</a></li>
           <li><a href="/new">Create Team</a></li>
           <li class="active"><a>Battle</a></li>
@@ -41,100 +48,99 @@
 
 <!-- ENEMY TEAM -->
 {{#enemy}}
+<div class="row">
+  <div class="col s12">
+    <h5 class="center-align">Battle team {{team_name}} by user {{username}}!</h5>
+  </div>
+</div>
   <div class="hide" id="enemyData" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}"></div>
 {{/enemy}}
 <div class="row" id="enemyTeam" team-id="{{team.team_id}}">
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy1" poke-id={{team.pokemon_1_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy2" poke-id={{team.pokemon_2_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
        <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy3" poke-id={{team.pokemon_3_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy4" poke-id={{team.pokemon_4_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy5" poke-id={{team.pokemon_5_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy6" poke-id={{team.pokemon_6_id}}>
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
@@ -147,26 +153,35 @@
 
 <!-- BATTLE STATUS -->
   <div class="row">
-    <button class="btn" id="battle">BATTLE</button>
-  </div>
-  <div class="row">
-    <div class="col s2 card-panel status" id="status1">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status1">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
-    <div class="col s2 card-panel status" id="status2">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status2">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
-    <div class="col s2 card-panel status" id="status3">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status3">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
-    <div class="col s2 card-panel status" id="status4">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status4">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
-    <div class="col s2 card-panel status" id="status5">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status5">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
-    <div class="col s2 card-panel status" id="status6">
-      <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+    <div class="col s2">
+      <div class="card-panel status hide" id="status6">
+        <i class="material-icons"></i><span class="card-title center-align full-width"></span>
+      </div>
     </div>
   </div>
 
@@ -176,7 +191,7 @@
 <!-- SELECT YOUR TEAM -->
 
 <div class="row">
-  <div class="input-field col s12">
+  <div class="input-field col s10">
     <select id="team-select">
       <option disabled selected value="">Select your team</option>
       {{#teams}}
@@ -184,102 +199,103 @@
       {{/teams}}
     </select>
   </div>
+  <div class="col s2">
+    <button class="btn" id="battle">BATTLE</button>
+  </div>
 </div>
+
+
+
+
 <!-- END SELECT YOUR TEAM -->
 
 <!-- DISPLAY YOUR TEAM -->
   <div class="row" id="team" team-id="{{team.team_id}}">
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon1" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon2" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon3" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon4" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon5" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>
       </div>
     </div>
-    <div class="col s2">
+    <div class="col s4 m2">
       <div class="card bottom-row hide" id="pokemon6" poke-id="">
         <div class="card-image">
           <img src="#!" class="bottom-row-img valign">
         </div>
         <div class="card-content">
           <p>
-            <span class="name"></span><br>
+            <span class="name"></span><img src="#!" class="bottom-row-img type-img"><br>
             <span class="hp"></span><br>
-            <span class="type"></span><br>
-            <span class="attack"></span><br>
+            <span class="attack"></span>
             <span class="defense"></span>
           </p>
         </div>

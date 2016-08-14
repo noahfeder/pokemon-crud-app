@@ -35,6 +35,7 @@ $(function(){
     $('.display_poke').each(function(ind,el){
       loadPokemonData(el);
     });
+    $(".button-collapse").sideNav();
   };
 
   initPage();

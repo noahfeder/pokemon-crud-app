@@ -27,6 +27,20 @@ $(function(){
     });
   };
 
+  function bingTest() {
+    $.ajax({
+      'method' : 'GET',
+      'url' : '/images/q=nature&color=red'
+    }).always(function(data) {
+      var rand = Math.floor(Math.random() * data.value.length);
+      var img = data.value[rand].contentUrl
+      $('body').css({
+        'background-image': 'url(' + img + ')'
+      });
+      console.log(data);
+    });
+  }
+
   function initPage() {
     $('select').material_select();
     $('#login_button').on('click',makeRequest);
@@ -37,6 +51,7 @@ $(function(){
         makeRequest('login');
       }
     });
+    bingTest();
   };
 
   initPage();

@@ -46,7 +46,7 @@ $(function(){
       .attr('poke-id',poke.poke_id);
     var availableSlots = $('.hide.card').length;
     if (availableSlots === 0) {
-      $('.btn-floating').removeClass('red').addClass('green rotate'); //TODO ROUTE EDIT PAGE
+      $('.btn-floating').removeClass('red').addClass('green rotate');
       $('.green').on('click',function(e){
         e.preventDefault();
         $('#modal1').openModal();
@@ -88,7 +88,6 @@ $(function(){
     $('.card.bottom-row').each(function(index, el) {
       $.getJSON('/pokemon/'+$(el).attr('poke-id'))
         .done(function(data){
-          console.log(data);
           addToTeam(data,'pokemon'+current);
           current++;
       });
@@ -110,8 +109,7 @@ $(function(){
       'poke6' : $('#pokemon6').attr('poke-id'),
       'id' : $('#team').attr('team-id')
     };
-    console.log(team_data);
-    $.ajax({ // TODO DISMISS RETURNS TO TEAM FUNCTION, OK BUTTON SUBMITS
+    $.ajax({
       'url'    : '/'+team_data.id,
       'method' : 'PUT',
       'data'   : team_data
@@ -141,10 +139,8 @@ $(function(){
     $('#pokeSelect').on('change',pokeChangeListener);
     initializeTeam();
     $('#update').on('click',updateTeam)
-    $('.remove_pokemon').on('click',function(e){
-      e.preventDefault();
-      removePokemon();
-    });
+    $('.remove_pokemon').on('click',removePokemon);
+    $('.button-collapse').sideNav();
   }
 
   initPage();

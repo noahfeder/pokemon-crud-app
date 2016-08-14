@@ -40,13 +40,16 @@ SOURCES:
 * http://bulbapedia.bulbagarden.net/wiki/Damage : Damage algo
 
 TODO: 
+* Bing images tweak
+* Colorize
+* Remove BING key from images.js
 * ~~LINK TO EDIT from /teams/~~
 * ~~Can't edit other pls teams on /teams/:id/edit route~~
 * ~~TYPE damage?~~
-* TYPE icons?
-* modal close separate from submit for dismissing modals on team create and team edit
+* ~~TYPE icons?~~
+* ~~modal close separate from submit for dismissing modals on team create and team edit~~
 * ~~team selection options:~~
   * ~~Random 6 pokemon NO~~
-  * random otheruser team CHECK
+  * ~~random otheruser team CHECK~~
   * ~~select otheruser team NO~~
 
