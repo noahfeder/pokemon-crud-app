@@ -32,7 +32,9 @@
   animation: rotate 0.4s forwards linear;
 }
 
-
+.full-width {
+  width: 100%;
+}
 
 
 

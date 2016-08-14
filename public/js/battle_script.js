@@ -84,15 +84,20 @@ $(function(){
       if (myAttack > enemyAttack) {
         $status.children('i')
           .text('thumb_up')
-          .addClass('green-text');
+          .removeClass()
+          .addClass('green-text material-icons');
         $status.children('span').text('WIN');
       } else if (myAttack < enemyAttack) {
         $status.children('i')
           .text('thumb_down')
-          .addClass('red-text');
+          .removeClass()
+          .addClass('red-text material-icons');
         $status.children('span').text('LOSE');
       } else {
-        $status.children('i').text('thumbs_up_down');
+        $status.children('i')
+          .text('thumbs_up_down')
+          .removeClass()
+          .addClass('material-icons grey-text');
         $status.children('span').text('DRAW');
       }
     }
