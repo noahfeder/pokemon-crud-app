@@ -22,8 +22,6 @@ router.get('/',function(req,res) {
   if (req.query.type) {
     db.any('SELECT * FROM pokemon WHERE type = $1',[req.query.type])
     .catch(function(error){
-      console.log('typed')
-      console.log(error)
       res.send(error);
     })
     .then(function(data){
@@ -32,8 +30,6 @@ router.get('/',function(req,res) {
   } else {
     db.any('SELECT * FROM pokemon;')
     .catch(function(error){
-      console.log('all')
-      console.log(error)
       res.send(error);
     })
     .then(function(data){

@@ -18,12 +18,17 @@
   {{/logged_in}}
 </head>
 <body>
-<div class="container">
+<div class="container topbar">
   <div class="row">
     <nav class="col s12 red darken-2">
       <div class="nav-wrapper">
         {{#logged_in}}
-        <a href="/" class="brand-logo">Pokemon Training</a>
+        <a href="/">
+            <div class="semicircle brand-logo hoverable">
+              <div class="innercircle"></div>
+              <div class="line"></div>
+            </div>
+        </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="active"><a>View Teams</a></li>
           <li><a href="/new">Create Team</a></li>
@@ -43,11 +48,18 @@
         </ul>
         {{/logged_in}}
         {{^logged_in}}
-        <a class="brand-logo center">Pokemon Training</a>
+        <a href="/">
+          <div class="semicircle brand-logo center hoverable">
+            <div class="innercircle"></div>
+            <div class="line"></div>
+          </div>
+        </a>
         {{/logged_in}}
       </div>
     </nav>
   </div>
+</div>
+<div class="container">
   {{#logged_in}}
   <div class="row">
   {{#teams}}
@@ -143,8 +155,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12">
-        <form id="login_form">
+        <form id="login_form" class="col s12">
           <div class="row">
             <div class="input-field col s12">
               <input id="username" type="text" class="validate">
@@ -168,7 +179,6 @@
             </div>
           </div>
         </form>
-        </div>
       </div>
     </div>
   </div>

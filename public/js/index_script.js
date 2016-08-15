@@ -27,7 +27,21 @@ $(function(){
     })
   };
 
+  function bing(color) {
+    $.ajax({
+      'method' : 'GET',
+      'url' : '/images/q=nature&color=' + color
+    }).always(function(data) {
+      var rand = Math.floor(Math.random() * data.value.length);
+      var img = data.value[rand].contentUrl
+      $('body').css({
+        'background-image': 'url(' + img + ')'
+      });
+    });
+  };
+
   function initPage() {
+    bing('monochrome');
     $('.delete_button').on('click', function(e) {
       e.preventDefault();
       deleteTeam(this);

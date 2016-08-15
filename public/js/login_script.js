@@ -12,7 +12,6 @@ $(function(){
   function makeRequest() {
     var fromClick = $(arguments[0].toElement).val()
     var route = (fromClick) ? fromClick : arguments[0];
-    console.log(route);
     var data = {
       'username' : $('#username').val(),
       'password' : $('#password').val()
@@ -22,24 +21,22 @@ $(function(){
       'method' : 'POST',
       'data'   : data
     }).always(function(response) {
-      console.log(response);
       handleResponse(response);
     });
   };
 
-  function bingTest() {
+  function bing(color) {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=nature&color=red'
+      'url' : '/images/q=nature&color=' + color
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
       $('body').css({
         'background-image': 'url(' + img + ')'
       });
-      console.log(data);
     });
-  }
+  };
 
   function initPage() {
     $('select').material_select();
@@ -51,7 +48,7 @@ $(function(){
         makeRequest('login');
       }
     });
-    bingTest();
+    bing('red');
   };
 
   initPage();

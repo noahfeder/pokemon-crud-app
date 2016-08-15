@@ -32,7 +32,7 @@ $(function(){
   function viewPokemon(poke) {
     $('.main > .card-image > img').attr('src', 'http://www.pokestadium.com/sprites/xy/'+poke.img_name+'.gif');
     $('.card-title').text('#'+poke.poke_id+': '+poke.poke_name);
-    $('.type').text('Type: ' + poke.type);
+    $('.type').text('Type: ' + poke.type.toUpperCase());
     $('.hp').text('HP: ' + poke.hp);
     $('.attack').text('Attack: ' + poke.attack);
     $('.defense').text('Defense: ' + poke.defense);
@@ -132,6 +132,19 @@ $(function(){
     $(this).parent().parent().children('.card-image').children('img').attr('src', '#!');
   }
 
+  function bing(color) {
+    $.ajax({
+      'method' : 'GET',
+      'url' : '/images/q=nature&color=' + color
+    }).always(function(data) {
+      var rand = Math.floor(Math.random() * data.value.length);
+      var img = data.value[rand].contentUrl
+      $('body').css({
+        'background-image': 'url(' + img + ')'
+      });
+    });
+  };
+
   function initPage() {
     $('select').material_select();
     $('#addPokemon').on('click',addPokemonListener);
@@ -141,6 +154,7 @@ $(function(){
     $('#update').on('click',updateTeam)
     $('.remove_pokemon').on('click',removePokemon);
     $('.button-collapse').sideNav();
+    bing('blue');
   }
 
   initPage();

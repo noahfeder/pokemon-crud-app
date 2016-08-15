@@ -13,22 +13,16 @@
   <script src="/js/battle_script.js"></script>
 </head>
 <body>
-
-<!-- FAB -->
-
-<!-- <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-  <a class="btn-floating btn-large red hoverable" href="#!">
-    <i class="large material-icons" id="fab_text">not_interested</i>
-  </a>
-</div> -->
-
-<div class="container">
-
-<!-- NAVBAR -->
+<div class="container topbar">
   <div class="row">
     <nav class="col s12 red darken-2">
       <div class="nav-wrapper">
-        <a href="/" class="brand-logo">Pokemon Training</a>
+        <a href="/">
+            <div class="semicircle brand-logo hoverable">
+              <div class="innercircle"></div>
+              <div class="line"></div>
+            </div>
+        </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="/">View Teams</a></li>
           <li><a href="/new">Create Team</a></li>
@@ -45,12 +39,15 @@
       </div>
     </nav>
   </div>
+</div>
+
+<div class="container">
 
 <!-- ENEMY TEAM -->
 {{#enemy}}
 <div class="row">
   <div class="col s12">
-    <h5 class="center-align">Battle team {{team_name}} by user {{username}}!</h5>
+    <div class="center-align blue lighten-3 card-panel">Battle team {{team_name}} by user {{username}}!</div>
   </div>
 </div>
   <div class="hide" id="enemyData" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}"></div>
@@ -191,7 +188,7 @@
 <!-- SELECT YOUR TEAM -->
 
 <div class="row">
-  <div class="input-field col s10">
+  <div class="input-field col s7 m10">
     <select id="team-select">
       <option disabled selected value="">Select your team</option>
       {{#teams}}
@@ -199,8 +196,8 @@
       {{/teams}}
     </select>
   </div>
-  <div class="col s2">
-    <button class="btn" id="battle">BATTLE</button>
+  <div class="col s5 m2">
+    <button class="btn waves-effect right" id="battle">BATTLE</button>
   </div>
 </div>
 

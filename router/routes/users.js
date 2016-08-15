@@ -18,7 +18,6 @@ router.post('/signup', function (req, res){
         'INSERT INTO users(username,password_hashed) VALUES ($1,$2) RETURNING *;',
         [username,password_hashed]
         ).catch(function(error) {
-          console.log(error);
           res.json({logged_in:false,error:error_message});
         }).then(function(user){
           req.session.user = user.user_id;
@@ -35,7 +34,6 @@ router.post('/login', function (req, res){
     'SELECT * FROM users WHERE username = $1',
     [username]
     ).catch(function(error) {
-      console.log(error);
       res.json({logged_in:false,error:error_message});
     }).then(function(user){
       bcrypt.compare(password,user.password_hashed)

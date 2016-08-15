@@ -40,8 +40,8 @@ SOURCES:
 * http://bulbapedia.bulbagarden.net/wiki/Damage : Damage algo
 
 TODO: 
-* Bing images tweak
-* Colorize
+* ~~Bing images tweak~~
+* ~~Colorize~~
 * Remove BING key from images.js
 * ~~LINK TO EDIT from /teams/~~
 * ~~Can't edit other pls teams on /teams/:id/edit route~~

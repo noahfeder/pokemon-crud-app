@@ -35,12 +35,10 @@ router.get('/new', function (req, res) {
 // CREATE POST
 router.post('/new',function(req, res) {
   var team = req.body;
-  console.log(req.session.user);
   db.none(
       'INSERT INTO teams(pokemon_1_id,pokemon_2_id,pokemon_3_id,pokemon_4_id,pokemon_5_id,pokemon_6_id,user_id_ref,team_name) VALUES($1,$2,$3,$4,$5,$6,$7,$8);',
       [team.pokemon_1_id,team.pokemon_2_id,team.pokemon_3_id,team.pokemon_4_id,team.pokemon_5_id,team.pokemon_6_id,req.session.user,team.team_name]
     ).catch(function(error){
-      console.log(error);
       res.json({error:error.message})
     }).then(function(){
       res.json({error:false});
@@ -75,7 +73,6 @@ router.get('/:id', function (req,res) {
           res.render('teams/show',{team: data[0], pokemon: data.slice(1,152),types: data.slice(152)});
         }
       }).catch(function(error){
-        console.log(error);
         res.redirect('/');
       });
   }

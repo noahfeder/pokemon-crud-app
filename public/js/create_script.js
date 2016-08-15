@@ -31,7 +31,7 @@ $(function(){
   function viewPokemon(poke) {
     $('.main > .card-image > img').attr('src', 'http://www.pokestadium.com/sprites/xy/'+poke.img_name+'.gif');
     $('.card-title').text('#'+poke.poke_id+': '+poke.poke_name);
-    $('.type').text('Type: ' + poke.type);
+    $('.type').text('Type: ' + poke.type.toUpperCase());
     $('.hp').text('HP: ' + poke.hp);
     $('.attack').text('Attack: ' + poke.attack);
     $('.defense').text('Defense: ' + poke.defense);
@@ -45,7 +45,7 @@ $(function(){
       .attr('poke_id',poke.poke_id);
     var availableSlots = $('.hide.card').length;
     if (availableSlots === 0) {
-      $('.btn-floating').removeClass('red').addClass('green rotate'); //TODO ROUTE EDIT PAGE
+      $('.btn-floating').removeClass('red').addClass('green rotate');
       $('.green').on('click',function(e){
         e.preventDefault();
         $('#modal1').openModal();
@@ -67,7 +67,6 @@ $(function(){
   }
 
   function pokeChangeListener() {
-    console.log('change');
     var selected_poke = $('#pokeSelect').val();
     $.getJSON('/pokemon/'+selected_poke)
       .done(function(data){
@@ -122,6 +121,19 @@ $(function(){
     })
   }
 
+  function bing(color) {
+    $.ajax({
+      'method' : 'GET',
+      'url' : '/images/q=nature&color=' + color
+    }).always(function(data) {
+      var rand = Math.floor(Math.random() * data.value.length);
+      var img = data.value[rand].contentUrl
+      $('body').css({
+        'background-image': 'url(' + img + ')'
+      });
+      console.log(data);
+    });
+  };
 
   function initPage() {
     $('select').material_select();
@@ -131,6 +143,7 @@ $(function(){
     $('.remove_pokemon').on('click',removePokemon);
     $('#save_team').on('click', submitNewTeam);
     $(".button-collapse").sideNav();
+    bing('green');
   }
 
 

@@ -5,6 +5,7 @@ body {
 
 #login_form {
   background-color:  rgba(255,255,255,0.75);
+  border-radius: 5px;
 }
 
 .big-card-img {
@@ -22,7 +23,7 @@ body {
 }
 
 #typeSelectButton {
-  margin-top:  20px;
+  margin-top:  18px;
 }
 
 .remove-poke {
@@ -54,6 +55,62 @@ body {
 
 .bottom-row .card-content {
   font-size: 12px;
+}
+
+.semicircle {
+  background: linear-gradient(to top, rgba(255,255,255,0.7), #fff 25%, #fff 50%, #f00 51%, #f00 75%, #f44);
+  width:  50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black;
+  position: relative;
+  margin-top: 3px;
+}
+
+@media only screen and (min-width: 601px) {
+  .semicircle {
+    margin-top: 6px;
+  }
+}
+
+.innercircle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  -webkit-filter: drop-shadow(0px 1px 1px grey);
+  z-index: 2;
+}
+
+.line {
+  width: 48px;
+  border: 1px solid black;
+  position: absolute;
+  top: 22.5px;
+}
+
+.select-wrapper {
+  background-color:  rgba(255,255,255,0.75);
+}
+
+#battle {
+  margin-top:  18px;
+}
+
+.container.topbar {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+  .container.topbar {
+    width: 70%;
+  }
 }
 
 /*!

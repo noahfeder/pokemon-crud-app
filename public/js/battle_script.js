@@ -108,12 +108,25 @@ $(function(){
     $.getJSON('/types/').done(function(data){
       data.forEach(function(el) {
         types[el.type_name] = el;
-      })
-      console.log(types);
-    })
-  }
+      });
+    });
+  };
+
+  function bing(color) {
+    $.ajax({
+      'method' : 'GET',
+      'url' : '/images/q=nature&color=' + color
+    }).always(function(data) {
+      var rand = Math.floor(Math.random() * data.value.length);
+      var img = data.value[rand].contentUrl
+      $('body').css({
+        'background-image': 'url(' + img + ')'
+      });
+    });
+  };
 
   function initPage() {
+    bing('yellow');
     $('#team-select').on('change',initializeTeam)
     initializeEnemy();
     $('select').material_select();
