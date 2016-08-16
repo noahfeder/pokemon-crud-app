@@ -29,7 +29,8 @@ $(function(){
       var data = {
       'username' : $('#new-username').val(),
       'password' : $('#new-password').val(),
-      'password2' : $('#new-password-2').val()
+      'password2' : $('#new-password-2').val(),
+      'color' : $('#colorPicker').val()
       };
     } else {
       var data = {
@@ -42,15 +43,14 @@ $(function(){
       'method' : 'POST',
       'data'   : data
     }).always(function(response) {
-      console.log(response);
       handleResponse(response);
     });
   };
 
-  function bing(color) {
+  function bing() {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=pattern&color=' + color
+      'url' : '/images'
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
@@ -61,7 +61,7 @@ $(function(){
   };
 
   function initPage() {
-    bing('red');
+    bing();
     $('select').material_select();
     $('.button-collapse').sideNav();
     $('#login_button').on('click',makeRequest);

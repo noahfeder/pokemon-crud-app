@@ -17,6 +17,7 @@ $(function(){
     $firstEmpty.parent().parent().removeClass('hide')
       .attr({
         'poke-id':poke.poke_id,
+        'poke-name' : poke.poke_name,
         'hp': poke.hp,
         'attack' : poke.attack,
         'defense' : poke.defense,
@@ -45,7 +46,9 @@ $(function(){
       $.getJSON('/pokemon/'+el)
         .done(function(data){
           addToTeam(data,'pokemon'+String(index + 1));
-          battle();
+          if ($('.bottom-row.hide').length === 0) {
+            battle();
+          }
       });
     });
   };
@@ -86,12 +89,14 @@ $(function(){
         $enemy = $('#enemy' + i),
         $status = $('#status' + i);
       var pokemon = {
+        'name' : $pokemon.attr('poke-name'),
         'attack' : $pokemon.attr('attack'),
         'defense' : $pokemon.attr('defense'),
         'hp' : $pokemon.attr('hp'),
         'type' : $pokemon.attr('poke-type')
       };
       var enemy = {
+        'name' : $enemy.attr('poke-name'),
         'attack' : $enemy.attr('attack'),
         'defense' : $enemy.attr('defense'),
         'hp' : $enemy.attr('hp'),
@@ -104,19 +109,19 @@ $(function(){
           .text('thumb_up')
           .removeClass()
           .addClass('green-text material-icons');
-        $status.children('span').text('WIN');
+        $status.children('span').text(pokemon.name + ' defeats ' + enemy.name);
       } else if (myAttack < enemyAttack) {
         $status.children('i')
           .text('thumb_down')
           .removeClass()
           .addClass('red-text material-icons');
-        $status.children('span').text('LOSE');
+        $status.children('span').text(pokemon.name + ' loses to ' + enemy.name);
       } else {
         $status.children('i')
           .text('thumbs_up_down')
           .removeClass()
           .addClass('material-icons grey-text');
-        $status.children('span').text('DRAW');
+        $status.children('span').text(pokemon.name + ' and ' + enemy.name + ' draw');
       }
     }
   }
@@ -129,10 +134,10 @@ $(function(){
     });
   };
 
-  function bing(color) {
+  function bing() {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=pattern&color=' + color
+      'url' : '/images'
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
@@ -143,7 +148,7 @@ $(function(){
   };
 
   function initPage() {
-    bing('yellow');
+    bing();
     $('.button-collapse').sideNav();
     $('select').material_select();
     cacheTypes();

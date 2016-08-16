@@ -28,10 +28,10 @@ $(function(){
     })
   };
 
-  function bing(color) {
+  function bing() {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=pattern&color=' + color
+      'url' : '/images'
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
@@ -42,7 +42,7 @@ $(function(){
   };
 
   function initPage() {
-    bing('monochrome');
+    bing();
     $('.delete_button').on('click', function(e) {
       e.preventDefault();
       var id = $(this).attr('team-id');

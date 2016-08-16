@@ -5,10 +5,10 @@ const request = require('request');
 
 var key = process.env.BING_KEY;
 
-router.get('/:queries',function(req,res) {
-  var queries = req.params.queries
+router.get('/',function(req,res) {
+  var color = req.session.color ? req.session.color : 'teal';
   var options = {
-    url: 'https://api.cognitive.microsoft.com/bing/v5.0/images/search/?size=wallpaper&' + queries,
+    url: 'https://api.cognitive.microsoft.com/bing/v5.0/images/search/?size=wallpaper&q=pattern&color=' + color,
     headers: {
       'Ocp-Apim-Subscription-Key' : key
     }

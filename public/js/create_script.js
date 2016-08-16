@@ -121,10 +121,10 @@ $(function(){
     })
   }
 
-  function bing(color) {
+  function bing() {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=pattern&color=' + color
+      'url' : '/images'
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
@@ -143,7 +143,7 @@ $(function(){
     $('.remove_pokemon').on('click',removePokemon);
     $('#save_team').on('click', submitNewTeam);
     $(".button-collapse").sideNav();
-    bing('green');
+    bing();
   }
 
 

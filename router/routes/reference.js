@@ -11,7 +11,7 @@ router.get('/types',function(req,res){
   })
   .then(function(data){
     if (req.session.user) {
-      res.render('types/index',{types:data,logged_in:true});
+      res.render('types/index',{types:data,logged_in:true, color:req.session.color});
     } else {
       res.render('types/index',{types:data,logged_in:false});
     }
@@ -28,7 +28,7 @@ router.get('/types/:type',function(req,res) {
     console.log(error);
   }).then(function(data){
     if (req.session.user) {
-      res.render('types/show',{type:data[0],types:data.slice(1),logged_in:true});
+      res.render('types/show',{type:data[0],types:data.slice(1),logged_in:true, color:req.session.color});
     } else {
       res.render('types/show',{type:data[0],types:data.slice(1),logged_in:false});
     }
@@ -57,7 +57,7 @@ router.get('/pokemon',function(req,res) {
     })
     .then(function(data){
       if (req.session.user) {
-        res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:true});
+        res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:true, color:req.session.color});
       } else {
         res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:false});
       }
@@ -69,7 +69,7 @@ router.get('/pokemon',function(req,res) {
     })
     .then(function(data){
       if (req.session.user) {
-        res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:true});
+        res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:true, color:req.session.color});
       } else {
         res.render('pokemon/index',{types:data.slice(0,18),pokemon:data.slice(18),logged_in:false});
       }
@@ -87,7 +87,7 @@ router.get('/pokemon/:id',function(req,res) {
       })
       .then(function(data){
         if (req.session.user) {
-          res.render('pokemon/show',{pokemon:data,logged_in:true})
+          res.render('pokemon/show',{pokemon:data,logged_in:true, color:req.session.color})
         } else {
           res.render('pokemon/show',{pokemon:data,logged_in:false})
         }
@@ -99,7 +99,7 @@ router.get('/pokemon/:id',function(req,res) {
         res.redirect('/')
       }).then(function(data) {
         if (req.session.user) {
-          res.render('pokemon/show',{pokemon:data,logged_in:true})
+          res.render('pokemon/show',{pokemon:data,logged_in:true, color:req.session.color})
         } else {
           res.render('pokemon/show',{pokemon:data,logged_in:false})
         }

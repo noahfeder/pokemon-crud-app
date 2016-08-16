@@ -12,6 +12,7 @@ router.post('/signup', function (req, res){
   var username = req.body.username,
       password = req.body.password,
       password2 = req.body.password2,
+      color = req.body.color,
       password_message = 'Passwords must match.',
       user_message = 'Username not available.';
   if (password !== password2) {
@@ -20,13 +21,14 @@ router.post('/signup', function (req, res){
     bcrypt.hash(password,10)
       .then(function(password_hashed) {
         db.one(
-          'INSERT INTO users(username,password_hashed) VALUES ($1,$2) RETURNING *;',
-          [username,password_hashed]
+          'INSERT INTO users(username,password_hashed,color) VALUES ($1,$2,$3) RETURNING *;',
+          [username,password_hashed,color]
         ).catch(function(error) {
           res.json({logged_in:false,error:user_message});
         }).then(function(user){
           req.session.user = user.user_id;
-          res.json({logged_in:true});
+          req.session.color = user.color;
+          res.json({logged_in:true,color:req.session.color});
         })
     });
   }
@@ -46,7 +48,8 @@ router.post('/login', function (req, res){
       bcrypt.compare(password,user.password_hashed)
         .then(function(match) {
           req.session.user = user.user_id;
-          res.json({logged_in:true});
+          req.session.color = user.color;
+          res.json({logged_in:true,color:req.session.color});
         }).catch(function(error){
           res.json({logged_in:false,error:error_message});
         })
