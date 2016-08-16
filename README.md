@@ -6,11 +6,18 @@
     * express-session
     * body-parser
     * pg-promise
+    * request
     * jquery
     * jquery UI
     * materialize
 
- the approach taken, installation instructions, unsolved problems, etc.
+2. The approach taken
+    Create an account, create teams of pokemon, and see how they would fare against other users' teams
+
+3.installation instructions
+    
+
+unsolved problems, etc.
 Tables
 
 Users
