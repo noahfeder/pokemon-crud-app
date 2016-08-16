@@ -43,9 +43,9 @@ TODO:
 * ~~Reference pages for pokemon (all,type,id,name) {use routes from pokemon.js}~~
 * ~~Navbar/SideNav links to ref pages~~
 * ~~Color-code bing colors to nav~~
-* remove local links to db
+* ~~remove local links to db~~
 * ~~User color-coding?~~
-* trouble shoot drag-and-drop on #pokemon6
+* ~~trouble shoot drag-and-drop on #pokemon6 //library issue~~
 * ~~Confirm delete modal~~
 * ~~Battle Status update?~~
 * ~~Login/Signup option~~
