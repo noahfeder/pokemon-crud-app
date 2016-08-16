@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Types</title>
+  <title>{{pokemon.poke_name}}</title>
   <link rel="stylesheet" type="text/css" href="/css/materialize.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -63,61 +63,32 @@
 </div>
 
 <div class="container">
-
-<div class="row">
-  <div class="col s12">
-    <div class="card-panel">
-      <h3 class="center-align">Type Reference</h3>
+{{#pokemon}}
+  <div class="row">
+    <div class="col s12">
+      <div class="card horizontal main">
+        <div class="card-image col s6">
+          <img src="http://www.pokestadium.com/sprites/xy/{{img_name}}.gif" class="big-card-img">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <span class="card-title">#{{poke_id}}: {{poke_name}}</span>
+            <p><span class="type">Type: {{type}}<img class="type-img" src="/img/types/{{type}}.png"></span><br>
+            <span class="hp">HP: {{hp}}</span><br>
+            <span class="attack">Attack: {{attack}}</span><br>
+            <span class="defense">Defense: {{defense}}</span>
+            </p>
+          </div>
+          <div class="card-action">
+            <a class="btn green waves-effect waves-red" href="/reference/pokemon">Back</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+{{/pokemon}}
 </div>
 
-<div class="row">
-    <div class="type-row center-align" type-name="{{type_name}}">
-      <div class="type-item"></div>
-      {{#types}}
-      <div class="type-item"><img alt="{{type_name}}" class="tooltipped" data-tooltip="{{type_name}}" data-position="top" data-delay="50" src="/img/types/{{type_name}}.png"></div>
-      {{/types}}
-    </div>
-  {{#types}}
-    <div class="type-row" type-name="{{type_name}}">
-      <div class="type-item"><a href="/reference/types/{{type_name}}"><img alt="{{type_name}}" class="tooltipped" data-tooltip="{{type_name}}" data-position="left" data-delay="50" src="/img/types/{{type_name}}.png"></a></div>
-      <div class="type-item">{{normal}}x</div>
-      <div class="type-item">{{fire}}x</div>
-      <div class="type-item">{{water}}x</div>
-      <div class="type-item">{{electric}}x</div>
-      <div class="type-item">{{grass}}x</div>
-      <div class="type-item">{{ice}}x</div>
-      <div class="type-item">{{fighting}}x</div>
-      <div class="type-item">{{poison}}x</div>
-      <div class="type-item">{{ground}}x</div>
-      <div class="type-item">{{flying}}x</div>
-      <div class="type-item">{{psychic}}x</div>
-      <div class="type-item">{{bug}}x</div>
-      <div class="type-item">{{rock}}x</div>
-      <div class="type-item">{{ghost}}x</div>
-      <div class="type-item">{{dragon}}x</div>
-      <div class="type-item">{{dark}}x</div>
-      <div class="type-item">{{steel}}x</div>
-      <div class="type-item">{{fairy}}x</div>
-    </div>
-  {{/types}}
-</div>
 
-</div>
-
-  <!-- MODAL IF NEEDED -->
-<!-- <div class="modal" id="modal1">
-  <div class="modal-content">
-    <div class="input-field col s8 offset-s2">
-      <input type="text" id="teamName" name="teamName">
-      <label for="teamName">Name your new team!</label>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Let's go!</a>
-  </div>
-</div> -->
-</div>
 </body>
 </html>

@@ -63,6 +63,7 @@ $(function(){
   function initPage() {
     bing('red');
     $('select').material_select();
+    $('.button-collapse').sideNav();
     $('#login_button').on('click',makeRequest);
     $('#create-user').on('click',makeRequest);
     $('#signup_button').on('click',function(){
