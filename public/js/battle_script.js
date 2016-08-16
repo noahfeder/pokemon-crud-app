@@ -57,9 +57,6 @@ $(function(){
       $('.username').text(enemy.username);
       $('#enemyData').attr('data-id',enemy.pokemon_1_id + '_' + enemy.pokemon_2_id + '_' + enemy.pokemon_3_id + '_' + enemy.pokemon_4_id + '_' + enemy.pokemon_5_id + '_' + enemy.pokemon_6_id);
       initializeEnemy();
-      if ($('.bottom-row.hide').length === 0) {
-        battle();
-      }
     }).fail(function(error){
       console.log(error);
     })
@@ -71,6 +68,9 @@ $(function(){
       $.getJSON('/pokemon/'+el)
         .done(function(data){
           addToTeam(data,'enemy'+String(index + 1));
+            if ($('.bottom-row.hide').length === 0) {
+              battle();
+            }
       });
     });
   };
