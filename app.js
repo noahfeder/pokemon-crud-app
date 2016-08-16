@@ -5,8 +5,7 @@ const pgp = require('pg-promise')();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-as-promised');
 const session = require('express-session');
-
-
+require('dotenv').config();
 const db = pgp(process.env.DATABASE_URL);
 
 app.engine('html', mustache());

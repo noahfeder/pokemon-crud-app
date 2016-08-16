@@ -52,15 +52,18 @@
 <div class="container main">
 
 <!-- ENEMY TEAM -->
-{{#enemy}}
-<div class="row">
-  <div class="col s12">
-    <div class="center-align blue lighten-3 card-panel">Battle team <span class="team_name">{{team_name}}</span> by user <span class="username">{{username}}</span>! <a class="loop"><i class="right green-text material-icons">loop</i></a></div>
+  {{#enemy}}
+  <div class="row">
+    <div class="col s12">
+      <div class="center-align blue lighten-3 card-panel">
+        Battle team <span class="team_name">{{team_name}}</span> by user <span class="username">{{username}}</span>!
+        <a class="loop"><i class="right green-text material-icons">loop</i></a>
+      </div>
+    </div>
   </div>
-</div>
   <div class="hide" id="enemyData" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}"></div>
-{{/enemy}}
-<div class="row" id="enemyTeam" team-id="{{team.team_id}}">
+  {{/enemy}}
+  <div class="row" id="enemyTeam" team-id="{{team.team_id}}">
     <div class="col s4 m2">
       <div class="card bottom-row hide" id="enemy1" poke-id={{team.pokemon_1_id}}>
         <div class="card-image">
@@ -195,19 +198,16 @@
 
 <!-- SELECT YOUR TEAM -->
 
-<div class="row">
-  <div class="input-field col s12">
-    <select id="team-select">
-      <option disabled selected value="">Select your team</option>
-      {{#teams}}
-      <option value="{{team_id}}" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
-      {{/teams}}
-    </select>
+  <div class="row">
+    <div class="input-field col s12">
+      <select id="team-select">
+        <option disabled selected value="">Select your team</option>
+        {{#teams}}
+        <option value="{{team_id}}" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
+        {{/teams}}
+      </select>
+    </div>
   </div>
-</div>
-
-
-
 
 <!-- END SELECT YOUR TEAM -->
 
@@ -306,20 +306,6 @@
   </div>
 <!-- END YOUR TEAM -->
 
-</div>
-
-  <!-- MODAL IF NEEDED -->
-<!-- <div class="modal" id="modal1">
-  <div class="modal-content">
-    <div class="input-field col s8 offset-s2">
-      <input type="text" id="teamName" name="teamName">
-      <label for="teamName">Name your new team!</label>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Let's go!</a>
-  </div>
-</div> -->
 </div>
 </body>
 </html>

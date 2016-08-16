@@ -156,8 +156,15 @@ $(function(){
     $('#team-select').on('change',initializeTeam)
     $('.loop').on('click',newEnemy);
     $('#team').sortable({
-      containment: '#team',
-      appendTo: '.container.main',
+      items: '> .col',
+      appendTo: '.card.bottom-row',
+      cursor: 'move',
+      cursorAt: {
+        top: 30,
+        left: 35
+      },
+      container: '#team',
+      tolerance: 'pointer',
       update: function() {
         var i = 1;
         $(this).children().children().each(function(index,el){

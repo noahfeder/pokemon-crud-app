@@ -17,6 +17,7 @@ router.get('/', function (req, res){
 });
 
 // CREATE GET
+// new
 router.get('/new', function (req, res) {
   if (!req.session.user) {
     res.redirect('/');
@@ -27,12 +28,14 @@ router.get('/new', function (req, res) {
     ).catch(function(error){
       res.redirect('/');
     }).then(function(data){
+      // new
       res.render('teams/create',{pokemon: data.slice(0,151),types: data.slice(151), color:req.session.color});
     });
   }
 });
 
 // CREATE POST
+// create
 router.post('/new',function(req, res) {
   if (!req.session.user) {
     res.redirect('/');
@@ -94,7 +97,7 @@ router.get('/:id', function (req,res) {
   }
 });
 
-// EDIT
+// UPDATE
 router.put('/:id', function (req,res) {
   if(!req.session.user) {
     res.redirect('/');
@@ -110,6 +113,9 @@ router.put('/:id', function (req,res) {
       });
   }
 });
+
+// EDIT
+//router.get('edit/:id', function (req,res) {
 
 
 // DELETE

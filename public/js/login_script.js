@@ -32,6 +32,13 @@ $(function(){
       'password2' : $('#new-password-2').val(),
       'color' : $('#colorPicker').val()
       };
+      if (data.username.length < 4 || data.username.indexOf(' ') > -1) {
+        alertError('#new-username');
+        return;
+      } else if (data.password !== data.password2 || data.password.length < 7 || data.password.indexOf(' ') > -1) {
+        alertError('#new-password,#new-password-2');
+        return;
+      }
     } else {
       var data = {
         'username' : $('#username').val(),
