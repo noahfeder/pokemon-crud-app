@@ -58,6 +58,7 @@ router.post('/login', function (req, res){
 
 router.get('/logout', function (req, res){
   req.session.user = null;
+  req.session.color = null;
   res.redirect('/');
 });
 
