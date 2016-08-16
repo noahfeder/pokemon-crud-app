@@ -14,13 +14,14 @@ $(function(){
 
 
   function deleteTeam(el) {
-    var id = $(el).attr('team-id');
+    var id = $(this).parent().parent().children('input').val();
     $.ajax({
       'url' : '/' + id,
       'method' : 'DELETE'
     }).always(function(response){
       if (response.deleted) {
         $('div[team-id="'+id+'"]').remove();
+        $('#modal-delete').closeModal();
       } else {
         alert('Internal server error. Please log-in again.');
       }
@@ -44,12 +45,15 @@ $(function(){
     bing('monochrome');
     $('.delete_button').on('click', function(e) {
       e.preventDefault();
-      deleteTeam(this);
+      var id = $(this).attr('team-id');
+      $('#team-to-delete').val(id);
+      $('#modal-delete').openModal();
     })
     $('.display_poke').each(function(ind,el){
       loadPokemonData(el);
     });
-    $(".button-collapse").sideNav();
+    $('#final-delete').on('click', deleteTeam)
+    $('.button-collapse').sideNav();
   };
 
   initPage();

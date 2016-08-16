@@ -39,6 +39,8 @@ $(function(){
   };
 
   function initializeTeam() {
+    $('#battle').removeClass('disabled');
+    $('#battle').on('click',battle);
     var idArray = $(':selected').attr('data-id').split('_');
     idArray.forEach(function(el,index) {
       $.getJSON('/pokemon/'+el)
@@ -47,6 +49,18 @@ $(function(){
       });
     });
   };
+
+  function newEnemy() {
+    $.getJSON('/battle/new').done(function(data){
+      var enemy = data.enemy;
+      $('.team_name').text(enemy.team_name);
+      $('.username').text(enemy.username);
+      $('#enemyData').attr('data-id',enemy.pokemon_1_id + '_' + enemy.pokemon_2_id + '_' + enemy.pokemon_3_id + '_' + enemy.pokemon_4_id + '_' + enemy.pokemon_5_id + '_' + enemy.pokemon_6_id);
+      initializeEnemy();
+    }).fail(function(error){
+      console.log(error);
+    })
+  }
 
   function initializeEnemy() {
     var enemyArray = $('#enemyData').attr('data-id').split('_');
@@ -127,12 +141,24 @@ $(function(){
 
   function initPage() {
     bing('yellow');
-    $('#team-select').on('change',initializeTeam)
-    initializeEnemy();
+    $('.button-collapse').sideNav();
     $('select').material_select();
-    $('#battle').on('click',battle);
     cacheTypes();
-    $(".button-collapse").sideNav();
+    initializeEnemy();
+    $('#team-select').on('change',initializeTeam)
+    $('.loop').on('click',newEnemy);
+    $('#team').sortable({
+      containment: '#team',
+      appendTo: '.container.main',
+      update: function() {
+        var i = 1;
+        $(this).children().children().each(function(index,el){
+          $(el).attr('id','pokemon'+String(i));
+          i++;
+        });
+        battle();
+      }
+    });
   };
 
   initPage();

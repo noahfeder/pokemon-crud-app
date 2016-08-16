@@ -23,11 +23,8 @@
     <nav class="col s12 red darken-2">
       <div class="nav-wrapper">
         {{#logged_in}}
-        <a href="/">
-            <div class="semicircle brand-logo hoverable">
-              <div class="innercircle"></div>
-              <div class="line"></div>
-            </div>
+        <a href="/" class="brand-logo">
+            <div class="pokeball"></div>
         </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="active"><a>View Teams</a></li>
@@ -48,11 +45,8 @@
         </ul>
         {{/logged_in}}
         {{^logged_in}}
-        <a href="/">
-          <div class="semicircle brand-logo center hoverable">
-            <div class="innercircle"></div>
-            <div class="line"></div>
-          </div>
+        <a href="/" class="brand-logo">
+          <div class="pokeball"></div>
         </a>
         {{/logged_in}}
       </div>
@@ -142,6 +136,27 @@
       </div>
     </div>
   {{/teams}}
+  {{^teams}}
+    <div class="col s12">
+      <div class="card">
+        <div class="card-image">
+          <img src="/img/sadpikachu.png">
+        </div>
+        <div class="card-content">
+          <p><h4>Looks like you haven't created a team yet!</h4><br>
+          <h5>Click <a href="/new">here</a> to get started!</h5>
+          </p>
+        </div>
+      </div>
+    </div>
+  {{/teams}}
+  </div>
+  <div class="modal" id="modal-delete">
+    <input class="hide" type="text" value="" id="team-to-delete">
+    <div class="modal-content">
+      <button class="red waves-effect waves-red btn" id="final-delete">Delete Team</button>
+      <button class="waves-effect waves-green btn-flat right modal-close modal-action">Keep Team</button>
+    </div>
   </div>
   {{/logged_in}}
   {{^logged_in}}
@@ -158,13 +173,13 @@
         <form id="login_form" class="col s12">
           <div class="row">
             <div class="input-field col s12">
-              <input id="username" type="text" class="validate">
+              <input id="username" type="text" class="validate" pattern="[^ ]{1,24}" autofocus required>
               <label for="username">Username</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
+              <input id="password" type="password" class="validate" pattern="[^ ]{1,}" required>
               <label for="password">Password</label>
             </div>
           </div>
@@ -174,12 +189,40 @@
               <label for="login_button" class="hide">Login</label>
             </div>
             <div class="input-field col s6 right-align logbuttons">
-              <input id="signup_button" type="button" class="btn waves-effect" value="signup">
-              <label for="signup_button" class="hide">Sign Up</label>
+              <input id="signup_button" type="button" class="btn-flat waves-effect waves-blue" value="New User">
+              <label for="signup_button" class="hide">New User?</label>
             </div>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+  <div class="modal" id="signup-modal">
+    <div class="modal-content">
+      <h5 class="welcome_message">Sign up here!</h5>
+      <form id="signup_form" class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="new-username" type="text" class="validate" pattern="[^ ]{1,24}" required>
+              <label for="new-username">Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="new-password" type="password" class="validate" pattern="[^ ]{1,}" required>
+              <label for="new-password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="new-password-2" type="password" class="validate" pattern="[^ ]{1,}" required>
+              <label for="new-password-2">Confirm Password</label>
+            </div>
+          </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <input value="signup" id="create-user" type="button" class="center btn waves-effect waves-light">
     </div>
   </div>
   {{/logged_in}}

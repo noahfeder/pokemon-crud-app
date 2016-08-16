@@ -34,8 +34,11 @@ router.get('/new', function (req, res) {
 
 // CREATE POST
 router.post('/new',function(req, res) {
-  var team = req.body;
-  db.none(
+  if (!req.session.user) {
+    res.redirect('/');
+  } else {
+    var team = req.body;
+    db.none(
       'INSERT INTO teams(pokemon_1_id,pokemon_2_id,pokemon_3_id,pokemon_4_id,pokemon_5_id,pokemon_6_id,user_id_ref,team_name) VALUES($1,$2,$3,$4,$5,$6,$7,$8);',
       [team.pokemon_1_id,team.pokemon_2_id,team.pokemon_3_id,team.pokemon_4_id,team.pokemon_5_id,team.pokemon_6_id,req.session.user,team.team_name]
     ).catch(function(error){
@@ -43,11 +46,13 @@ router.post('/new',function(req, res) {
     }).then(function(){
       res.json({error:false});
     });
+  }
+
 });
 
 // BATTLE
 router.get('/battle', function (req, res){
-  if(!req.session.user){
+  if (!req.session.user) {
     res.render('index',{logged_in:false});
   } else {
     db.any('SELECT u.username, t.team_name, t.pokemon_1_id, t.pokemon_2_id, t.pokemon_3_id, t.pokemon_4_id, t.pokemon_5_id, t.pokemon_6_id FROM teams t JOIN users u ON u.user_id = t.user_id_ref WHERE t.user_id_ref != $1 ORDER BY RANDOM() LIMIT 1; SELECT * FROM teams WHERE user_id_ref = $1;',[req.session.user,req.session.user])
@@ -56,6 +61,17 @@ router.get('/battle', function (req, res){
     });
   }
 });
+
+router.get('/battle/new',function (req,res) {
+  if (!req.session.user) {
+    res.send({'error':'error'});
+  } else {
+    db.any('SELECT u.username, t.team_name, t.pokemon_1_id, t.pokemon_2_id, t.pokemon_3_id, t.pokemon_4_id, t.pokemon_5_id, t.pokemon_6_id FROM teams t JOIN users u ON u.user_id = t.user_id_ref WHERE t.user_id_ref != $1 ORDER BY RANDOM() LIMIT 1;',[req.session.user])
+    .then(function(data){
+      res.send({enemy: data[0]});
+    });
+  }
+})
 
 // SHOW
 router.get('/:id', function (req,res) {
@@ -81,7 +97,7 @@ router.get('/:id', function (req,res) {
 // EDIT
 router.put('/:id', function (req,res) {
   if(!req.session.user) {
-    res.render('index',{logged_in:false});
+    res.redirect('/');
   } else {
     var data = req.body;
     db.none(
@@ -99,7 +115,7 @@ router.put('/:id', function (req,res) {
 // DELETE
 router.delete('/:id', function (req, res){
   if(!req.session.user){
-    res.render('index',{logged_in:false});
+    res.redirect('/');
   } else {
     var id = req.params.id;
     db.none('DELETE FROM teams WHERE team_id = $1 AND user_id_ref = $2;',[id,req.session.user])

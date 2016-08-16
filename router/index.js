@@ -3,5 +3,6 @@ module.exports = function(app) {
   app.use('/types',require('./routes/types'));
   app.use('/users',require('./routes/users'));
   app.use('/images',require('./routes/images'));
+  app.use('/reference',require('./routes/reference'));
   app.use('/', require('./routes/teams'));
 };

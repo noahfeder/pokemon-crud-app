@@ -40,9 +40,18 @@ SOURCES:
 * http://bulbapedia.bulbagarden.net/wiki/Damage : Damage algo
 
 TODO: 
+* Reference pages for pokemon (all,type,id,name) {use routes from pokemon.js}
+* Navbar/SideNav links to ref pages
+* Color-code bing colors to nav
+* remove local links to db
+* User color-coding?
+* ~~Confirm delete modal~~
+* ~~Battle Status update?~~
+* ~~Login/Signup option~~
+* ~~New user view~~
 * ~~Bing images tweak~~
 * ~~Colorize~~
-* Remove BING key from images.js
+* ~~Remove BING key from images.js~~
 * ~~LINK TO EDIT from /teams/~~
 * ~~Can't edit other pls teams on /teams/:id/edit route~~
 * ~~TYPE damage?~~

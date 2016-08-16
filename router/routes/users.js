@@ -11,19 +11,26 @@ const db = pgp(process.env.DATABASE_URL || 'postgres://stavro510@localhost:5432/
 router.post('/signup', function (req, res){
   var username = req.body.username,
       password = req.body.password,
-      error_message = 'Cannot create user';
-  bcrypt.hash(password,10)
-    .then(function(password_hashed) {
-      db.one(
-        'INSERT INTO users(username,password_hashed) VALUES ($1,$2) RETURNING *;',
-        [username,password_hashed]
+      password2 = req.body.password2,
+      password_message = 'Passwords must match.',
+      user_message = 'Username not available.';
+  if (password !== password2) {
+    res.json({logged_in:false,error:password_message});
+  } else {
+    bcrypt.hash(password,10)
+      .then(function(password_hashed) {
+        db.one(
+          'INSERT INTO users(username,password_hashed) VALUES ($1,$2) RETURNING *;',
+          [username,password_hashed]
         ).catch(function(error) {
-          res.json({logged_in:false,error:error_message});
+          res.json({logged_in:false,error:user_message});
         }).then(function(user){
           req.session.user = user.user_id;
           res.json({logged_in:true});
         })
     });
+  }
+
 });
 
 router.post('/login', function (req, res){

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle</title>
+  <link rel="stylesheet" type="text/css" href="/css/materialize.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/type_script.js"></script>
+</head>
+<body>
+<div class="container topbar">
+  <div class="row">
+    <nav class="col s12 red darken-2">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">
+          <div class="pokeball"></div>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">View Teams</a></li>
+          <li><a href="/new">Create Team</a></li>
+          <li class="active"><a>Battle</a></li>
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+        <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="menu-mobile" class="side-nav">
+          <li><a href="/">View Teams</a></li>
+          <li><a href="/new">Create Team</a></li>
+          <li class="active"><a>Battle</a></li>
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel">
+      <h3 class="center-align">Type Reference</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="type-row center-align" type-name="{{type_name}}">
+      <div class="type-item"></div>
+      {{#types}}
+      <div class="type-item"><img alt="{{type_name}}" class="tooltipped" data-tooltip="{{type_name}}" data-position="top" data-delay="50" src="/img/types/{{type_name}}.png"></div>
+      {{/types}}
+      <!-- <div class="type-item"><img src="/img/types/normal.png"></div>
+      <div class="type-item"><img src="/img/types/fire.png"></div>
+      <div class="type-item"><img src="/img/types/water.png"></div>
+      <div class="type-item"><img src="/img/types/electric.png"></div>
+      <div class="type-item"><img src="/img/types/grass.png"></div>
+      <div class="type-item"><img src="/img/types/ice.png"></div>
+      <div class="type-item"><img src="/img/types/fighting.png"></div>
+      <div class="type-item"><img src="/img/types/poison.png"></div>
+      <div class="type-item"><img src="/img/types/ground.png"></div>
+      <div class="type-item"><img src="/img/types/flying.png"></div>
+      <div class="type-item"><img src="/img/types/psychic.png"></div>
+      <div class="type-item"><img src="/img/types/bug.png"></div>
+      <div class="type-item"><img src="/img/types/rock.png"></div>
+      <div class="type-item"><img src="/img/types/ghost.png"></div>
+      <div class="type-item"><img src="/img/types/dragon.png"></div>
+      <div class="type-item"><img src="/img/types/dark.png"></div>
+      <div class="type-item"><img src="/img/types/steel.png"></div>
+      <div class="type-item"><img src="/img/types/fairy.png"></div> -->
+    </div>
+  {{#types}}
+    <div class="type-row" type-name="{{type_name}}">
+      <div class="type-item"><img alt="{{type_name}}" class="tooltipped" data-tooltip="{{type_name}}" data-position="left" data-delay="50" src="/img/types/{{type_name}}.png"></div>
+      <div class="type-item">{{normal}}x</div>
+      <div class="type-item">{{fire}}x</div>
+      <div class="type-item">{{water}}x</div>
+      <div class="type-item">{{electric}}x</div>
+      <div class="type-item">{{grass}}x</div>
+      <div class="type-item">{{ice}}x</div>
+      <div class="type-item">{{fighting}}x</div>
+      <div class="type-item">{{poison}}x</div>
+      <div class="type-item">{{ground}}x</div>
+      <div class="type-item">{{flying}}x</div>
+      <div class="type-item">{{psychic}}x</div>
+      <div class="type-item">{{bug}}x</div>
+      <div class="type-item">{{rock}}x</div>
+      <div class="type-item">{{ghost}}x</div>
+      <div class="type-item">{{dragon}}x</div>
+      <div class="type-item">{{dark}}x</div>
+      <div class="type-item">{{steel}}x</div>
+      <div class="type-item">{{fairy}}x</div>
+    </div>
+  {{/types}}
+</div>
+
+</div>
+
+  <!-- MODAL IF NEEDED -->
+<!-- <div class="modal" id="modal1">
+  <div class="modal-content">
+    <div class="input-field col s8 offset-s2">
+      <input type="text" id="teamName" name="teamName">
+      <label for="teamName">Name your new team!</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Let's go!</a>
+  </div>
+</div> -->
+</div>
+</body>
+</html>

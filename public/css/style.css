@@ -35,11 +35,26 @@ body {
 }
 
 @keyframes rotate {
-  100% {transform: scale(1.2, 1.2) rotate(360deg); -webkit-transform: rotate(360deg) scale(1.2, 1.2);}
+  100% {transform: scale(1.2, 1.2) rotate(360deg) ; -webkit-transform: rotate(360deg) scale(1.2, 1.2) ;}
+}
+
+@-webkit-keyframes rotate {
+  100% {transform: scale(1.2, 1.2) rotate(360deg) ; -webkit-transform: rotate(360deg) scale(1.2, 1.2) ;}
+}
+
+@keyframes rotate-ball {
+  0% {transform: scale(1,1) rotate(0deg); -webkit-transform: rotate(0deg) scale(1,1);}
+  50% {transform: scale(1.2, 1.2) rotate(360deg); -webkit-transform: rotate(360deg) scale(1.2, 1.2);}
+  100% {transform: scale(1,1) rotate(0deg); -webkit-transform: rotate(0deg) scale(1,1);}
+}
+
+@-webkit-keyframes rotate-ball {
+  100% {transform: scale(1.2, 1.2) rotate(360deg) ; -webkit-transform: rotate(360deg) scale(1.2, 1.2) ;}
 }
 
 .rotate {
-  animation: rotate 0.4s forwards linear;
+  animation: rotate 0.4s both linear;
+  -webkit-animation: rotate 0.4s both linear;
 }
 
 .full-width {
@@ -57,7 +72,8 @@ body {
   font-size: 12px;
 }
 
-.semicircle {
+.pokeball {
+  -webkit-background: linear-gradient(bottom, rgba(255,255,255,0.7), #fff 25%, #fff 50%, #f00 51%, #f00 75%, #f44);
   background: linear-gradient(to top, rgba(255,255,255,0.7), #fff 25%, #fff 50%, #f00 51%, #f00 75%, #f44);
   width:  50px;
   height: 50px;
@@ -67,13 +83,19 @@ body {
   margin-top: 3px;
 }
 
+.pokeball:hover {
+  animation: rotate-ball 2s both infinite;
+}
+
+
 @media only screen and (min-width: 601px) {
-  .semicircle {
+  .pokeball {
     margin-top: 6px;
   }
 }
 
-.innercircle {
+.pokeball::before {
+  content: '';
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -83,10 +105,12 @@ body {
   top: 18px;
   left: 18px;
   -webkit-filter: drop-shadow(0px 1px 1px grey);
+  filter: drop-shadow(0px 1px 1px grey);
   z-index: 2;
 }
 
-.line {
+.pokeball::after {
+  content: '';
   width: 48px;
   border: 1px solid black;
   position: absolute;
@@ -113,6 +137,36 @@ body {
   }
 }
 
+.type-row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.type-item {
+  flex:  1 0 5%;
+  text-align:  center;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+
+.type-row:not(:first-child) .type-item {
+  border-right:  1px solid black;
+}
+
+.type-row:nth-child(2n+2) {
+  background-color: rgba(0,255,0,0.5);
+}
+
+.type-item img {
+  max-width: 100%;
+  max-height: 100%
+}
+
+.loop {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  cursor: pointer;
+}
 /*!
  * animate.css -http://daneden.me/animate
  * Version - 3.5.1
