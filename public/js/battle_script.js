@@ -40,12 +40,12 @@ $(function(){
 
   function initializeTeam() {
     $('#battle').removeClass('disabled');
-    $('#battle').on('click',battle);
     var idArray = $(':selected').attr('data-id').split('_');
     idArray.forEach(function(el,index) {
       $.getJSON('/pokemon/'+el)
         .done(function(data){
           addToTeam(data,'pokemon'+String(index + 1));
+          battle();
       });
     });
   };
@@ -57,6 +57,9 @@ $(function(){
       $('.username').text(enemy.username);
       $('#enemyData').attr('data-id',enemy.pokemon_1_id + '_' + enemy.pokemon_2_id + '_' + enemy.pokemon_3_id + '_' + enemy.pokemon_4_id + '_' + enemy.pokemon_5_id + '_' + enemy.pokemon_6_id);
       initializeEnemy();
+      if ($('.bottom-row.hide').length === 0) {
+        battle();
+      }
     }).fail(function(error){
       console.log(error);
     })

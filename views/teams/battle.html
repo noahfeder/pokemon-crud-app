@@ -196,16 +196,13 @@
 <!-- SELECT YOUR TEAM -->
 
 <div class="row">
-  <div class="input-field col s7">
+  <div class="input-field col s12">
     <select id="team-select">
       <option disabled selected value="">Select your team</option>
       {{#teams}}
       <option value="{{team_id}}" data-id="{{pokemon_1_id}}_{{pokemon_2_id}}_{{pokemon_3_id}}_{{pokemon_4_id}}_{{pokemon_5_id}}_{{pokemon_6_id}}">{{team_name}}</option>
       {{/teams}}
     </select>
-  </div>
-  <div class="col s5">
-    <button class="disabled btn waves-effect right" id="battle">BATTLE</button>
   </div>
 </div>
 
