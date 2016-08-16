@@ -30,8 +30,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(flash());
-
 app.use(function(err, req, res, next){
   res.status(err.status || 500);
 });

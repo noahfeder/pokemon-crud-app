@@ -1,5 +1,16 @@
 # project2
+1. technologies used
+    * express
+    * mustache
+    * bcrypt-as-promised
+    * express-session
+    * body-parser
+    * pg-promise
+    * jquery
+    * jquery UI
+    * materialize
 
+ the approach taken, installation instructions, unsolved problems, etc.
 Tables
 
 Users
