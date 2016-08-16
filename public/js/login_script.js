@@ -50,7 +50,7 @@ $(function(){
   function bing(color) {
     $.ajax({
       'method' : 'GET',
-      'url' : '/images/q=nature&color=' + color
+      'url' : '/images/q=pattern&color=' + color
     }).always(function(data) {
       var rand = Math.floor(Math.random() * data.value.length);
       var img = data.value[rand].contentUrl
