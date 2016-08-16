@@ -109,7 +109,7 @@ $(function(){
       'team_name'    : $('#teamName').val()
     };
     $.ajax({
-      'url'    : '/new',
+      'url'    : '/create',
       'method' : 'POST',
       'data'   : pokemon_data
     }).done(function(data){

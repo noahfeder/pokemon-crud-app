@@ -13,6 +13,22 @@ body {
   padding: 10px;
 }
 
+.card {
+  background-color: rgba(255,255,255,0.75);
+}
+
+.card .card-action {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+  color: #666;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
+  color: #888;
+}
+
 .bottom-row-container {
   position: relative;
 }

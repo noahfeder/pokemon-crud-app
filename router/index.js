@@ -4,5 +4,6 @@ module.exports = function(app) {
   app.use('/users',require('./routes/users'));
   app.use('/images',require('./routes/images'));
   app.use('/reference',require('./routes/reference'));
+  app.use('/battle',require('./routes/battle'));
   app.use('/', require('./routes/teams'));
 };

@@ -10,9 +10,14 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <script src="/js/jquery.js"></script>
   <script src="/js/materialize.js"></script>
-  <script src="/js/show_script.js"></script>
+  <script src="/js/edit_script.js"></script>
 </head>
 <body>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red hoverable" href="#!">
+    <i class="large material-icons" id="fab_text">not_interested</i>
+  </a>
+</div>
 <div class="container topbar">
   <div class="row">
     <nav class="col s12 {{color}} darken-2">
@@ -48,74 +53,28 @@
   </div>
 </div>
 <div class="container">
-<div class="row">
-  <div class="col s12">
-    <div class="card-panel">
-      <h4>Team {{team.team_name}}</h4>
-      {{#editable}}
-      <a href="/edit/{{team.team_id}}" class="btn waves-effect waves-yellow yellow">Edit</a>
-      {{/editable}}
-    </div>
-  </div>
-</div>
-<div class="row" id="team" team-id="{{team.team_id}}">
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon1" poke-id={{team.pokemon_1_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
+
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s8 m5">
+          <select multiple id="typeSelect">
+            <option disabled selected value="">Filter by type?</option>
+            {{#types}}
+            <option value="{{type_name}}" class="left" data-icon="/img/types/{{type_name}}.png">{{type_name}}</option>
+            {{/types}}
+          </select>
         </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
+        <div class="col s4 m2 valign-wrapper">
+          <button class="btn waves-effect valign" id="typeSelectButton">Filter</button>
         </div>
-      </div>
-    </div>
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon2" poke-id={{team.pokemon_2_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
-        </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon3" poke-id={{team.pokemon_3_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
-        </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon4" poke-id={{team.pokemon_4_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
-        </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon5" poke-id={{team.pokemon_5_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
-        </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
-        </div>
-      </div>
-    </div>
-    <div class="col s4 m2">
-      <div class="card bottom-row hide" id="pokemon6" poke-id={{team.pokemon_6_id}}>
-        <div class="card-image">
-          <img src="#!" class="bottom-row-img valign">
-        </div>
-        <div class="card-action tiny">
-          <a class="show_pokemon">View</a>
+        <div class="input-field col s12 m5" id="pokeSelectWrapper">
+          <select id="pokeSelect">
+            <option disabled selected value="">Choose a Pokemon!</option>
+            {{#pokemon}}
+            <option value="{{poke_id}}" data-icon="http://www.pokestadium.com/sprites/green/{{img_name}}.png" data-id="{{poke_id}}" class="left {{type}}">#{{poke_id}}: {{poke_name}}</option>
+            {{/pokemon}}
+          </select>
         </div>
       </div>
     </div>
@@ -135,9 +94,80 @@
             <span class="defense"></span>
             </p>
           </div>
+          <div class="card-action">
+            <a class="btn disabled waves-effect waves-red" poke-id="" id="addPokemon">Add to team!</a>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row" id="team" team-id="{{team.team_id}}">
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon1" poke-id={{team.pokemon_1_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon2" poke-id={{team.pokemon_2_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon3" poke-id={{team.pokemon_3_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon4" poke-id={{team.pokemon_4_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon5" poke-id={{team.pokemon_5_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m2">
+      <div class="card bottom-row hide" id="pokemon6" poke-id={{team.pokemon_6_id}}>
+        <div class="card-image">
+          <img src="#!" class="bottom-row-img valign">
+        </div>
+        <div class="card-action tiny">
+          <a href="#1" class="remove_pokemon">Remove</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal1">
+  <div class="modal-content">
+    <a class="modal-action waves-effect waves-green btn" id="update">Commit changes</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat">Still working</a>
   </div>
 </div>
 </div>
