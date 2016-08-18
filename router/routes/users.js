@@ -6,15 +6,18 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-as-promised');
 const session = require('express-session');
 
+
 const db = pgp(process.env.DATABASE_URL);
 
 router.post('/signup', function (req, res){
+  var colors = ['teal','blue','brown','gray','green','orange','pink','purple','red','yellow'];
   var username = req.body.username,
       password = req.body.password,
       password2 = req.body.password2,
       color = req.body.color,
       password_message = 'Passwords must match.',
       user_message = 'Username not available.';
+  color =  (colors.indexOf(color) < 0) ? 'teal' : color;
   if (password !== password2) {
     res.json({logged_in:false,error:password_message});
   } else {
